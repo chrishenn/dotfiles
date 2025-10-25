@@ -1,0 +1,29 @@
+{{ if ne .chezmoi.os "linux" -}}
+.chezmoiscripts/linux/**
+
+.config/*
+!.config/starship.toml
+!.config/mise
+!.config/mise/**
+
+.local/share/plasma-systemmonitor
+.local/share/plasma-systemmonitor/**
+
+.oh-my-bash
+.oh-my-bash/**
+
+.bash_aliases
+.bashrc
+.profile
+{{ end -}}
+
+
+{{ if ne .chezmoi.os "windows" -}}
+.chezmoiscripts/windows/**
+
+Documents
+Documents/**
+
+appdata
+appdata/**
+{{ end -}}

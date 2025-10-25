@@ -1,0 +1,10 @@
+[tools]
+gitleaks = "latest"
+shellcheck = "latest"
+trufflehog = "latest"
+shfmt = "latest"
+hk = "latest"
+
+[env]
+# libgit2 doesn't support git extension "refstorage"
+HK_LIBGIT2 = 0

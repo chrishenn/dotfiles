@@ -1,0 +1,76 @@
+packages:
+  linux:
+    flatpak_remote:
+      - "signal-flatpak https://signalflatpak.github.io/signal/signal.flatpakrepo"
+      - "flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+    flatpak_custom:
+      - "signal-flatpak org.signal.Signal"
+    flatpak:
+      - md.obsidian.Obsidian
+      - io.github.cboxdoerfer.FSearch
+      - com.github.tchx84.Flatseal
+      - com.obsproject.Studio
+      - com.obsproject.Studio.Plugin.DroidCam
+      - com.discordapp.Discord
+    flatpak_override:
+      - "--user --device=all com.obsproject.Studio"
+    brews:
+      - dra
+      - git-filter-repo
+      - figlet
+      - lolcat
+    casks:
+    apt:
+      - qt6-style-kvantum
+      - fonts-firacode
+      - easyeffects
+      - input-remapper-gtk
+      - cifs-utils
+      - 7zip
+      - linux-headers-$(uname -r)
+      - build-essential
+      - dkms
+      - git
+      - autoconf
+      - checkinstall
+      - make
+      - automake
+      - curl
+      - openssl
+      - openssh-server
+      - wget
+      - net-tools
+  windows:
+    scoop_bucket:
+      - extras
+      - versions
+      - nerd-fonts
+    scoop:
+      - 1password-cli
+      - 7zip
+      - aria2
+      - brave
+      - dark
+      - dra
+      - everything
+      - eza
+      - firacode
+      - gh
+      - git
+      - grep
+      - imageglass
+      - innounp
+      - mise
+      - mpv.net
+      - nano
+      - obsidian
+      - pwsh
+      - terminal-icons
+      - tldr
+      - uutils-coreutils
+      - vcredist2022
+      - vscode
+      - windows-terminal-preview
+      - windowsdesktop-runtime-lts
+      - wiztree
+      - zen-browser

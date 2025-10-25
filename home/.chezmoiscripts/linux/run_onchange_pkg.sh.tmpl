@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# when the contents of packages.yaml changes, this hash will change, triggering this script to run on next chezmoi apply
+# packages.yaml hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
+
+# brew
+echo "brew pkgs: installing"
+brew bundle --file=/dev/stdin <<EOF
+{{ range .packages.linux.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.linux.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+echo "brew pkgs: installed"
+
+# apt
+echo "apt pkgs: installing"
+sudo apt update
+sudo apt install -y {{ range .packages.linux.apt -}} {{ . | quote }} {{ end }}
+echo "apt pkgs: installed"
+
+# flatpak
+echo "flatpak pkgs: installing"
+{{ range .packages.linux.flatpak_remote -}}
+flatpak remote-add --if-not-exists {{ . }}
+{{ end -}}
+
+flatpak install -y flathub {{ range .packages.linux.flatpak -}} {{ . | quote }} {{ end }}
+
+{{ range .packages.linux.flatpak_override -}}
+flatpak override {{ . }}
+{{ end -}}
+
+{{ range .packages.linux.flatpak_custom -}}
+flatpak install -y {{ . }}
+{{ end -}}
+echo "flatpak pkgs: installed"
+
+
+echo "linux packages installer: done"

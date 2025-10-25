@@ -1,0 +1,28 @@
+{{ if eq .chezmoi.os "linux" -}}
+
+# chezmoi bootstrap: install secrets manager (1password) before rendering further templates
+[hooks.read-source-state.pre]
+    command = ".local/share/chezmoi/home/.chezmoiscripts/linux/.install.sh"
+
+{{ end -}}
+
+
+{{ if eq .chezmoi.os "windows" -}}
+
+# chezmoi bootstrap: install secrets manager (1password) before rendering further templates
+[hooks.read-source-state.pre]
+    command = "powershell"
+    args = ["-c", "~/.local/share/chezmoi/home/.chezmoiscripts/windows/.install.ps1"]
+
+[onepassword]
+    mode = "service"
+
+{{ end -}}
+
+
+{{- $desktop := true -}}{{/*  */}}
+{{- $server := false -}}{{/*  */}}
+[data]
+    desktop = {{ $desktop }}
+    server = {{ $server }}
+
