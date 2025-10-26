@@ -38,6 +38,7 @@
 	enabled = true
 	autoupdate = true
 [core]
+    editor = nano
 	excludesfile = ~/.gitignore
 	fsmonitor = true
 	untrackedCache = true
