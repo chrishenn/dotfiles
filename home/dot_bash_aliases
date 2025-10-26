@@ -24,6 +24,8 @@ alias watch_pod='watch -n 1 kubectl get pods --all-namespaces -o wide'
 alias dlogs='docker compose logs'
 
 function newrepo {
+gh alias set newrepo 'repo create --private --push --source .' --clobber
+
 git init
 git add --all
 git commit -m "init"

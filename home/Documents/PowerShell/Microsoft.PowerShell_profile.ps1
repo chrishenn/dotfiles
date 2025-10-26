@@ -6,10 +6,14 @@ iex (&{zoxide init powershell | out-string})
 import-module "~\scoop\modules\Terminal-Icons"
 
 function newrepo {
+    gh alias set newrepo 'repo create --private --push --source .' --clobber
+
 	git init
 	git add --all
 	git commit -m "init"
-	gh auth login
+    if (-not (gh auth status)) {
+        gh auth refresh
+    }
 	gh newrepo
 }
 
