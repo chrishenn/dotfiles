@@ -1,9 +1,7 @@
 $env:Path += ";$env:USERPROFILE\bin"
 $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
 
-iex (&starship init powershell)
-iex (&{zoxide init powershell | out-string})
-import-module "~\scoop\modules\Terminal-Icons"
+set-alias cm chezmoi
 
 function newrepo {
     gh alias set newrepo 'repo create --private --push --source .' --clobber
@@ -24,3 +22,7 @@ function customLS {
     )
     eza -al $path
 }
+
+iex (&starship init powershell)
+iex (&{zoxide init powershell | out-string})
+import-module "~\scoop\modules\Terminal-Icons"
