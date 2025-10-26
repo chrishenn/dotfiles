@@ -29,8 +29,8 @@ gh alias set newrepo 'repo create --private --push --source .' --clobber
 git init
 git add --all
 git commit -m "init"
-if ! gh auth status >/dev/null 2>&1; then
-    gh auth refresh
+if ! gh auth status; then
+    $(op read "op://homelab/github/credential") | gh auth login -h github.com --git-protocol=ssh --skip-ssh-key --with-token
 fi
 gh newrepo
 }

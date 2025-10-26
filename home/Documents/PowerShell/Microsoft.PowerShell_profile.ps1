@@ -12,7 +12,7 @@ function newrepo {
 	git add --all
 	git commit -m "init"
     if (-not (gh auth status)) {
-        gh auth refresh
+        $(op read "op://homelab/github/credential") | gh auth login -h github.com --git-protocol=ssh --skip-ssh-key --with-token
     }
 	gh newrepo
 }
