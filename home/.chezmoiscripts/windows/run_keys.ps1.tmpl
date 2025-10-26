@@ -1,0 +1,6 @@
+$cnt = @'
+{{ range gitHubKeys "chrishenn" -}}
+{{   .Key }}
+{{ end -}}
+'@
+set-content 'C:\ProgramData\ssh\administrators_authorized_keys' "$cnt"

@@ -1,0 +1,25 @@
+# "dev tools" (desktop)
+
+bazel = "latest"
+clang = "21.1.4"
+cmake = "latest"
+ninja = "latest"
+meson = "latest"
+
+aws-cli = "latest"
+pulumi = "latest"
+hk = "latest"
+pkl = "latest"
+prettier = "latest"
+gitleaks = "latest"
+trufflehog = "latest"
+just = "latest"
+ruff = "latest"
+pre-commit = "latest"
+shfmt = "latest"
+shellcheck = "latest"
+mask = "latest"
+
+"cargo:tealdeer" = "latest"
+"cargo:tokei" = "latest"
+"ubi:gitlab-org/cli" = { version = "latest", exe = "glab", provider = "gitlab" }

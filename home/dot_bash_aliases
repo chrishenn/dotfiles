@@ -8,10 +8,10 @@ alias grep='grep --color=always'
 alias fgrep='fgrep --color=always'
 alias egrep='egrep --color=always'
 
-alias ls='eza -al'
-alias l='eza -al'
-alias ll='eza -alF'
-alias la='eza -A'
+alias ls='eza -aal'
+alias l='eza -aal'
+alias ll='eza -aalF'
+alias la='eza -Aa'
 
 alias ka='kubeadm'
 alias apply='kubectl apply -f'
@@ -21,14 +21,27 @@ alias ksys='kubectl -n kube-system'
 alias watch_svc='watch -n 1 kubectl get svc --all-namespaces -o wide'
 alias watch_pod='watch -n 1 kubectl get pods --all-namespaces -o wide'
 
+alias dc='docker compose'
 alias dlogs='docker compose logs'
 
 function newrepo {
 git init
 git add --all
 git commit -m "init"
-if ! gh auth status >/dev/null 2>&1; then
-    gh auth refresh
+if ! gh auth status; then
+    $(op read "op://homelab/github/credential") | gh auth login -h github.com --git-protocol=ssh --skip-ssh-key --with-token
 fi
 gh newrepo
+}
+
+function newrepog {
+git init
+git add --all
+git commit -m "init"
+if ! glab auth status &>/dev/null; then
+    glab auth login --hostname gitlab.henn.dev -g ssh -a gitlab.henn.dev -p https --token $(op read "op://homelab/Gitlab/pat")
+fi
+glab newrepo
+git push --set-upstream origin --all
+git push --set-upstream origin --tags
 }

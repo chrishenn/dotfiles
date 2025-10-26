@@ -1,13 +1,12 @@
-amends "package://github.com/jdx/hk/releases/download/v1.19.0/hk@1.19.0#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v1.19.0/hk@1.19.0#/Builtins.pkl"
+amends "package://github.com/jdx/hk/releases/download/v1.24.1/hk@1.24.1#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.24.1/hk@1.24.1#/Builtins.pkl"
 
 local formatters = new Mapping<String, Step> {
-    ["prettier"] = Builtins.prettier
-    ["newlines"] = Builtins.newlines
-    ["shfmt"] = (Builtins.shfmt) {
-        // the "check" is broken in the shfmt builtin: always throws errors
-        check = "shfmt -l -s {{files}}"
+    ["prettier"] = (Builtins.prettier) {
+        batch = false
     }
+    ["newlines"] = Builtins.newlines
+    ["shfmt"] = Builtins.shfmt
 }
 
 local linters = new Mapping<String, Step> {
@@ -18,15 +17,15 @@ local linters = new Mapping<String, Step> {
     ["trufflehog"] {
         // always check the whole workspace and git history
         workspace_indicator = "hk.pkl"
-        check = "mise x -- trufflehog git --fail --no-update --log-level=-1 file://{{workspace}} 2>/dev/null"
+        check = "trufflehog git --fail --no-update --log-level=-1 file://{{workspace}} 2>/dev/null"
 
         // scan only files selected by hk, respecting `hk check --all`
-        // check = "mise x -- trufflehog --fail --no-update filesystem {{files}}"
+        // check = "trufflehog --fail --no-update filesystem {{files}}"
     }
     ["gitleaks"] {
         // always check the whole workspace and git history
         workspace_indicator = "hk.pkl"
-        check = "mise x -- gitleaks detect --no-banner --log-level=fatal --source {{workspace}}"
+        check = "gitleaks detect --no-banner --log-level=fatal --source {{workspace}}"
     }
 }
 
@@ -37,8 +36,8 @@ hooks {
         steps = new Mapping<String, Step> {...formatters ...linters}
     }
     ["check"] {
-      fix = false
-      steps = new Mapping<String, Step> {...formatters ...linters}
+        fix = false
+        steps = new Mapping<String, Step> {...formatters ...linters}
     }
     ["fix"] {
         fix = true

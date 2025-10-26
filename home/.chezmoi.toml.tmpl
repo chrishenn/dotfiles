@@ -1,28 +1,23 @@
-{{ if eq .chezmoi.os "linux" -}}
+{{ if eq .chezmoi.os "linux"}}
 
+# not worth the squeeze
 # chezmoi bootstrap: install secrets manager (1password) before rendering further templates
-[hooks.read-source-state.pre]
-    command = ".local/share/chezmoi/home/.chezmoiscripts/linux/.install.sh"
+# [hooks.read-source-state.pre]
+#     command = ".local/share/chezmoi/home/.chezmoiscripts/linux/.install.sh"
 
-{{ end -}}
-
-
-{{ if eq .chezmoi.os "windows" -}}
-
-# chezmoi bootstrap: install secrets manager (1password) before rendering further templates
-[hooks.read-source-state.pre]
-    command = "powershell"
-    args = ["-c", "~/.local/share/chezmoi/home/.chezmoiscripts/windows/.install.ps1"]
-
-[onepassword]
-    mode = "service"
-
-{{ end -}}
+{{end}}
 
 
-{{- $desktop := true -}}{{/*  */}}
-{{- $server := false -}}{{/*  */}}
+{{if eq .chezmoi.os "windows"}}
+
+# [onepassword]
+#     mode = "service"
+
+{{end}}
+
+
+{{$choices := list "desktop" "server"}}
+{{$hosttype := promptChoiceOnce . "hosttype" "What type of host are you on" $choices}}
+
 [data]
-    desktop = {{ $desktop }}
-    server = {{ $server }}
-
+    hosttype = {{- $hosttype | quote -}}

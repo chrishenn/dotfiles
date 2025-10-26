@@ -1,5 +1,14 @@
-{{- if eq .chezmoi.os "windows" -}}
-{{-   include "dot_config/mise/.config_windows.toml" -}}
-{{- else if eq .chezmoi.os "linux" -}}
-{{-   include "dot_config/mise/.config_linux.toml" -}}
+{{- include "dot_config/mise/.common.toml" -}}
+
+{{ if eq .chezmoi.os "windows" }}
+{{   include "dot_config/mise/.windows.toml" }}
+{{- end -}}
+
+{{ if and (eq .chezmoi.os "linux") (eq .hosttype "server") }}
+{{   include "dot_config/mise/.linux_server.toml" }}
+{{- end -}}
+
+{{ if and (eq .chezmoi.os "linux") (eq .hosttype "desktop") }}
+{{   include "dot_config/mise/.linux_server.toml" }}
+{{   include "dot_config/mise/.linux_desktop.toml" }}
 {{- end -}}

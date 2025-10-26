@@ -104,16 +104,21 @@ export GTK_MENU_BAR_ACCEL=""
 # export PATH="$PATH:$HOME/.lmstudio/bin"
 
 test -f "$HOME/.xmake/profile" && source "$HOME/.xmake/profile"
+
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PATH:$PNPM_HOME"
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source "$HOME/.cargo/env"
-eval "$($HOME/.local/bin/mise activate bash)"
 
+export PATH="$PATH:$HOME/.pixi/bin"
+eval "$(pixi completion --shell bash)"
+
+export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+eval "$($HOME/.local/bin/mise activate bash)"
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 source <(op completion bash)
-
-export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
-export PATH="$PATH:$HOME/.local/share/mise/installs/pixi/latest/pixi"
+eval "$(fnox activate bash)"

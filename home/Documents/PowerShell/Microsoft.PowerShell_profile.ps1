@@ -1,15 +1,17 @@
 $env:Path += ";$env:USERPROFILE\bin"
 $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
 
-iex (&starship init powershell)
-iex (&{zoxide init powershell | out-string})
-import-module "~\scoop\modules\Terminal-Icons"
+set-alias cm chezmoi
 
 function newrepo {
+    gh alias set newrepo 'repo create --private --push --source .' --clobber
+
 	git init
 	git add --all
 	git commit -m "init"
-	gh auth login
+    if (-not (gh auth status)) {
+        $(op read "op://homelab/github/credential") | gh auth login -h github.com --git-protocol=ssh --skip-ssh-key --with-token
+    }
 	gh newrepo
 }
 
@@ -18,5 +20,15 @@ function customLS {
     param(
         [parameter(Mandatory = $false)][string] $path = "."
     )
-    eza -al $path
+    eza -aal $path
 }
+function customDC {
+    [alias('dc')]
+    param(
+        [parameter(Mandatory = $false)][string] $cmd = ""
+    )
+    docker compose $cmd
+}
+
+iex (&starship init powershell)
+iex (&{zoxide init powershell | out-string})

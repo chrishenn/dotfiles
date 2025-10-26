@@ -179,6 +179,10 @@ format = '[$symbol$state( \($name\))]($style) | '
 [nodejs]
 symbol = 'node '
 format = '[$symbol$version]($style) | '
+version_format = '${major}.${minor}'
+detect_extensions = []
+detect_files = []
+detect_folders = ['node_modules']
 
 [ocaml]
 symbol = 'ocaml '
@@ -283,7 +287,9 @@ format = '[$symbol$version]($style) | '
 [python]
 symbol = 'py '
 format = '[$symbol$version]($style) | '
+version_format = '${major}.${minor}'
 detect_extensions = []
+detect_files = []
 
 [raku]
 symbol = 'raku '

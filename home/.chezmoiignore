@@ -24,6 +24,9 @@
 Documents
 Documents/**
 
-appdata
-appdata/**
+AppData
+AppData/**
+
+scoop
+scoop/**
 {{ end -}}
