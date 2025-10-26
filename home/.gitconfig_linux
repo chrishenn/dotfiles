@@ -35,9 +35,11 @@
 	enabled = true
 	autoupdate = true
 [core]
+    editor = nano
 	excludesfile = ~/.gitignore
 	fsmonitor = true
 	untrackedCache = true
+    autocrlf = false
 [rebase]
 	autoSquash = true
 	autoStash = true
@@ -51,11 +53,9 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-
-; broken ?
-; [gpg]
-;     format = ssh
-; [gpg "ssh"]
-;     program = "/opt/1Password/op-ssh-sign"
-; [commit]
-;     gpgsign = true
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    program = "/opt/1Password/op-ssh-sign"
+[commit]
+    gpgsign = true

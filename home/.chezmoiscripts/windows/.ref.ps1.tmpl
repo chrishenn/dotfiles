@@ -1,0 +1,63 @@
+# when the contents of packages.yaml changes, this hash will change, triggering this script to run on next chezmoi apply
+# packages.yaml hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
+
+function scoop_bucket (
+    [parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string] $name
+) {
+    $tmp = $name.split(' ')
+    scoop bucket add @tmp
+}
+
+function scoop_shim (
+    [parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string] $name
+) {
+    $tmp = $name.split(' ')
+    if (-not ($tmp[0] -and $tmp[1])) {
+        write-host -f yellow "scoop shim: malformed shim: $name"
+        return
+    }
+    if (-not (scoop shim info $tmp[0])) {
+        write-host "adding shim"
+        scoop shim add @tmp
+    }
+}
+
+function gcm_app (
+    [parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string] $name
+) {
+    if (gcm $name -ea 0) {
+        return $true
+    }
+    return $false
+}
+
+function scoop_self_install {
+    if (-not (gcm_app scoop)) {
+        iex "& {$(irm get.scoop.sh -useb)} -RunAsAdmin"
+        scoop install 7zip git aria2 dark innounp lessmsi sudo
+        scoop config aria2-warning-enabled false
+    }
+}
+
+write-host -f cyan "scoop self: installing"
+scoop_self_install
+write-host -f green "scoop self: installed"
+
+write-host -f cyan "scoop buckets: installing"
+{{ range .packages.windows.scoop_bucket -}}
+scoop_bucket {{ . | quote }}
+{{ end -}}
+write-host -f green "scoop buckets: installed"
+
+write-host -f cyan "scoop packages: installing"
+scoop install --skip-hash-check {{ range .packages.windows.scoop -}} {{ . | quote }} {{ end }}
+write-host -f green "scoop packages: installed"
+
+write-host -f cyan "scoop shims: installing"
+{{ range .packages.windows.scoop_shim -}}
+scoop_shim {{ . | quote }}
+{{ end -}}
+write-host -f green "scoop shims: installed"
+
+
+write-host -f green "windows packages: done"

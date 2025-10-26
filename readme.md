@@ -2,17 +2,34 @@
 
 ### basic usage
 
-note: macos not supported
+note: These dotfile templates read from my 1password vault to render my ssh keys. You'll need to adapt them
+note: Macos not supported
 
 ```bash
 # linux: install, init, pull, and apply
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init chrishenn --apply
+OP_SERVICE_ACCOUNT_TOKEN=<token> \
+GH_TOKEN=<token> \
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init chrishenn --apply --git-lfs
 
-# windows: install, init, pull, and apply
-iex "&{$(irm 'https://get.chezmoi.io/ps1')}"; & ~\bin\chezmoi init chrishenn --apply
+# pull new changes from github, apply, overwrite any local dotfile changes
+chezmoi update --apply --force
 
 # clear chezmoi dotfiles, cache
 chezmoi purge
+```
+
+The initial aspiration was to install a secrets manager (1password) before rendering further templates, ie running
+an installer script on hooks.read-source-state.pre. However, the `op` binary does not propagate onto the path of the
+enclosing shell - meaning that chezmoi can't find it to render templates, after installing it.
+
+So, instead I'll just make sure `op` is in the parent shell and on the path:
+
+```powershell
+scoop install mise vcredist2022
+mise use -g chezmoi op
+$env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
+$env:OP_SERVICE_ACCOUNT_TOKEN = ''
+chezmoi init chrishenn --apply --force
 ```
 
 ### dev
@@ -48,3 +65,8 @@ https://github.com/twpayne/dotfiles/
   apt install commands require interactive sudo elevation - not ideal
   - would ansible be better suited to installing the packages step?
   - chezmoi depends on apt packages (1password); so after installing them, ansible could invoke chezmoi
+  - if pkg managers are booted with ansible, we can use chezmoi from mise package
+- todo: switch on desktop vs server in chezmoi.toml
+  - server
+    - install only 1password-cli
+    - embed OP_SERVICE_ACCOUNT_TOKEN

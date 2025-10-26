@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.os "windows" -}}
+{{-   include "dot_ssh/config_windows" -}}
+{{- else if eq .chezmoi.os "linux" -}}
+{{-   include "dot_ssh/config_linux" -}}
+{{- end -}}
