@@ -25,6 +25,3 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-
-eval "$($HOME/.local/bin/mise activate bash)"
-export PATH="$PATH:$HOME/.local/share/mise/installs/pixi/latest/pixi"

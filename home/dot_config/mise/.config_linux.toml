@@ -2,7 +2,6 @@
 uv = "latest"
 rust = "stable"
 go = "latest"
-pixi = "latest"
 zig = "latest"
 zls = "latest"
 lua = "latest"
