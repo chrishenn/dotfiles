@@ -11,6 +11,9 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init chrishenn --apply
 # windows: install, init, pull, and apply
 iex "&{$(irm 'https://get.chezmoi.io/ps1')}"; & ~\bin\chezmoi init chrishenn --apply
 
+# pull new changes from github, apply, overwrite any local dotfile changes
+chezmoi update --apply --force
+
 # clear chezmoi dotfiles, cache
 chezmoi purge
 ```
