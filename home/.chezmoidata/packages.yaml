@@ -46,7 +46,6 @@ packages:
       - versions
       - nerd-fonts
     scoop:
-      - 1password-cli
       - 7zip
       - aria2
       - brave
@@ -65,6 +64,7 @@ packages:
       - nano
       - obsidian
       - pwsh
+      - refreshenv
       - terminal-icons
       - tldr
       - uutils-coreutils

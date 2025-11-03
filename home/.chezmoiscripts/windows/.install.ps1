@@ -3,12 +3,32 @@
 function sys_app (
     [parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$name
 ) {
-    return (Get-WmiObject -Class Win32_Product | Where-Object {$_.Name -eq "$name"} | measure).count -gt 0
+    return (Get-ciminstance Win32_Product | Where-Object {$_.Name -match "$name"} | measure).count -gt 0
+}
+
+function scoop_self {
+    try {
+        if (gcm scoop -ea 0) {
+            return $true
+        }
+        return $false
+    } catch {
+        return $false
+    }
+}
+
+function scoop_self_install {
+    if (-not (scoop_self)) {
+        iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+    }
 }
 
 function scoop_app (
     [parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$name
 ) {
+    if (-not (scoop_self)) {
+        return $false
+    }
     return ((scoop export | ConvertFrom-Json).apps | where-object {$_.name -eq "$name"} | measure).count -gt 0
 }
 
@@ -27,34 +47,11 @@ function scoop_bucket (
     }
 }
 
-function scoop_self {
-    try {
-        if (gcm scoop -ea 0) {
-            return $true
-        }
-        return $false
-    } catch {
-        return $false
-    }
-}
-
 function installed (
     [parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$name
 ) {
-    return (sys_app $name) -or (scoop_self -and (scoop_app $name -ea 0))
-}
-
-function install_1password {
-    write-host "installing 1Password GUI"
-    $url = "https://downloads.1password.com/win/1PasswordSetup-latest.msi"
-    iwr $url -outfile "1pass.msi"
-    start-process msiexec -argumentlist '/i 1pass.msi' -wait
-    stop-process -name 1password
-}
-
-function install_1passwordcli {
-    write-host "installing 1Password CLI"
-    scoop install 1password-cli
+    # note: scoop_app matches name exactly (case-insensitive); sys_app matches on "real app name contains $name"
+    return (sys_app $name) -or (scoop_app $name)
 }
 
 function bootstrap {
@@ -64,25 +61,10 @@ function bootstrap {
         scoop config aria2-warning-enabled false
         scoop update
     }
-
-    if (-not (installed "1password")) {
-        install_1password
-
-        if (-not (installed "1password")) {
-            write-host "ERROR: 1password is not installed after attempted install"
-        } else {
-            write-host "SUCCESS: installed 1password"
-        }
-    }
-    if (-not (installed "1password-cli")) {
-        install_1passwordcli
-
-        if (-not (installed "1password-cli")) {
-            write-host "ERROR: 1password-cli is not installed after attempted install"
-        } else {
-            write-host "SUCCESS: installed 1password-cli"
-        }
-    }
+    scoop install refreshenv mise
+    refreshenv
+    # the scoop 1password-cli package is broken
+    mise use -g 1password-cli
 }
 
 bootstrap

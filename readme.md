@@ -2,7 +2,8 @@
 
 ### basic usage
 
-note: macos not supported
+note: These dotfile templates read from my 1password vault to render my ssh keys. You'll need to adapt them 
+note: Macos not supported
 
 ```bash
 # linux: install, init, pull, and apply
@@ -10,6 +11,11 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init chrishenn --apply
 
 # windows: install, init, pull, and apply
 iex "&{$(irm 'https://get.chezmoi.io/ps1')}"; & ~\bin\chezmoi init chrishenn --apply
+
+# windows: bootstrap from pixi
+irm -useb https://pixi.sh/install.ps1 | iex
+refreshenv
+pixi use -g mise 
 
 # pull new changes from github, apply, overwrite any local dotfile changes
 chezmoi update --apply --force
