@@ -1,13 +1,10 @@
-amends "package://github.com/jdx/hk/releases/download/v1.19.0/hk@1.19.0#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v1.19.0/hk@1.19.0#/Builtins.pkl"
+amends "package://github.com/jdx/hk/releases/download/v1.20.0/hk@1.20.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.20.0/hk@1.20.0#/Builtins.pkl"
 
 local formatters = new Mapping<String, Step> {
     ["prettier"] = Builtins.prettier
     ["newlines"] = Builtins.newlines
-    ["shfmt"] = (Builtins.shfmt) {
-        // the "check" is broken in the shfmt builtin: always throws errors
-        check = "shfmt -l -s {{files}}"
-    }
+    ["shfmt"] = Builtins.shfmt
 }
 
 local linters = new Mapping<String, Step> {

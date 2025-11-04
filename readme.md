@@ -2,7 +2,7 @@
 
 ### basic usage
 
-note: These dotfile templates read from my 1password vault to render my ssh keys. You'll need to adapt them 
+note: These dotfile templates read from my 1password vault to render my ssh keys. You'll need to adapt them
 note: Macos not supported
 
 ```bash
@@ -15,7 +15,7 @@ iex "&{$(irm 'https://get.chezmoi.io/ps1')}"; & ~\bin\chezmoi init chrishenn --a
 # windows: bootstrap from pixi
 irm -useb https://pixi.sh/install.ps1 | iex
 refreshenv
-pixi use -g mise 
+pixi use -g mise
 
 # pull new changes from github, apply, overwrite any local dotfile changes
 chezmoi update --apply --force
