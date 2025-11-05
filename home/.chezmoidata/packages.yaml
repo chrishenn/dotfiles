@@ -70,7 +70,7 @@ packages:
       - uutils-coreutils
       - vcredist2022
       - vscode
-      - windows-terminal-preview
+      - windows-terminal
       - windowsdesktop-runtime-lts
       - wiztree
       - zen-browser
