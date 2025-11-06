@@ -8,11 +8,11 @@ note: Macos not supported
 ```bash
 # linux: install, init, pull, and apply
 OP_SERVICE_ACCOUNT_TOKEN=<token> \
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init chrishenn --apply
+GH_TOKEN=<token> \
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init chrishenn --apply --git-lfs
 
 # windows: install, init, pull, and apply
-$env:OP_SERVICE_ACCOUNT_TOKEN = '<token>' 
-iex "&{$(irm 'https://get.chezmoi.io/ps1')}"; & ~\bin\chezmoi init chrishenn --apply
+$env:OP_SERVICE_ACCOUNT_TOKEN = '<token>'; iex "&{$(irm 'https://get.chezmoi.io/ps1')}"; & ~\bin\chezmoi init chrishenn --apply
 
 # windows: bootstrap from pixi
 irm -useb https://pixi.sh/install.ps1 | iex

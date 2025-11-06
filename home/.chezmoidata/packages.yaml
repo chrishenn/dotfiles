@@ -53,7 +53,7 @@ packages:
       - dra
       - everything
       - eza
-      - firacode
+      - firacode-nf
       - gh
       - git
       - grep
@@ -64,7 +64,6 @@ packages:
       - nano
       - obsidian
       - pwsh
-      - refreshenv
       - terminal-icons
       - tldr
       - uutils-coreutils

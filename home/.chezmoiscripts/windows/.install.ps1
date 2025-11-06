@@ -57,15 +57,15 @@ function installed (
 function bootstrap {
     if (-not (scoop_self)) {
         iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-        scoop install git innounp dark aria2 refreshenv mise
         scoop config aria2-warning-enabled false
         scoop update
     }
-    refreshenv
+    scoop install 7zip git aria2 dark innounp mise
+    $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
+    mise i
 
     # the scoop 1password-cli package is broken
     mise use -g 1password-cli
-    refreshenv
 }
 
 bootstrap
