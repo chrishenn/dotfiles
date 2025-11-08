@@ -61,6 +61,7 @@ function bootstrap {
         scoop update
     }
     scoop install -s 7zip git aria2 dark innounp mise
+    mise use -g op
 }
 
 bootstrap
