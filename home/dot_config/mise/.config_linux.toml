@@ -38,6 +38,7 @@ zellij = "latest"
 television = "latest"
 
 chezmoi = "latest"
+tokei = "latest"
 aws-cli = "latest"
 pulumi = "latest"
 hk = "latest"
