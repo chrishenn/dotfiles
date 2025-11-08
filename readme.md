@@ -11,19 +11,22 @@ OP_SERVICE_ACCOUNT_TOKEN=<token> \
 GH_TOKEN=<token> \
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init chrishenn --apply --git-lfs
 
-# windows: install, init, pull, and apply
-$env:OP_SERVICE_ACCOUNT_TOKEN = '<token>'; iex "&{$(irm 'https://get.chezmoi.io/ps1')}"; & ~\bin\chezmoi init chrishenn --apply
-
-# windows: bootstrap from pixi
-irm -useb https://pixi.sh/install.ps1 | iex
-refreshenv
-pixi use -g mise
-
 # pull new changes from github, apply, overwrite any local dotfile changes
 chezmoi update --apply --force
 
 # clear chezmoi dotfiles, cache
 chezmoi purge
+```
+
+```powershell
+$env:GH_PAT = ''
+$env:GITHUB_TOKEN = ''
+$env:OP_SERVICE_ACCOUNT_TOKEN = ''
+$env:Path += ";$env:USERPROFILE\bin"
+$env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
+
+iex "&{$(irm 'https://get.chezmoi.io/ps1')}"
+chezmoi init chrishenn --apply --force 
 ```
 
 ### dev

@@ -60,12 +60,7 @@ function bootstrap {
         scoop config aria2-warning-enabled false
         scoop update
     }
-    scoop install 7zip git aria2 dark innounp mise
-    $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
-    mise i
-
-    # the scoop 1password-cli package is broken
-    mise use -g 1password-cli
+    scoop install -s 7zip git aria2 dark innounp mise
 }
 
 bootstrap
