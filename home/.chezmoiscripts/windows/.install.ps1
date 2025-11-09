@@ -15,7 +15,7 @@ function bootstrap {
         scoop config aria2-warning-enabled false
         scoop update
     }
-    scoop install -s 7zip git aria2 dark innounp mise
+    scoop install -s 7zip git aria2 dark innounp mise refreshenv
 
     $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
     mise use -g op
