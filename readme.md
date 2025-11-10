@@ -21,7 +21,7 @@ chezmoi purge
 ```powershell
 $env:OP_SERVICE_ACCOUNT_TOKEN = ''
 $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
-mise use -g chezmoi 
+mise use -g chezmoi
 chezmoi init chrishenn --apply --force
 ```
 
