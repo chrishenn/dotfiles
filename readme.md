@@ -18,6 +18,12 @@ chezmoi update --apply --force
 chezmoi purge
 ```
 
+The initial aspiration was to install a secrets manager (1password) before rendering further templates, ie running
+an installer script on hooks.read-source-state.pre. However, the `op` binary does not propagate onto the path of the
+enclosing shell - meaning that chezmoi can't find it to render templates, after installing it.
+
+So, instead I'll just make sure `op` is in the parent shell and on the path:
+
 ```powershell
 scoop install mise vcredist2022
 mise use -g chezmoi op

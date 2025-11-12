@@ -9,10 +9,6 @@
 
 {{ if eq .chezmoi.os "windows" -}}
 
-# chezmoi bootstrap: install secrets manager (1password) before rendering further templates
-# nope! that does not work. We can install op running in service mode, but the shell running chezmoi can't find it, so
-# the templates fail to render.
-
 [onepassword]
     mode = "service"
 

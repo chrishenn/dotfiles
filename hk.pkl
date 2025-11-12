@@ -2,7 +2,9 @@ amends "package://github.com/jdx/hk/releases/download/v1.20.0/hk@1.20.0#/Config.
 import "package://github.com/jdx/hk/releases/download/v1.20.0/hk@1.20.0#/Builtins.pkl"
 
 local formatters = new Mapping<String, Step> {
-    ["prettier"] = Builtins.prettier
+    ["prettier"] = (Builtins.prettier) {
+      batch = false
+    }
     ["newlines"] = Builtins.newlines
     ["shfmt"] = Builtins.shfmt
 }
