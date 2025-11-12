@@ -12,7 +12,14 @@ function scoop_shim (
     [parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string] $name
 ) {
     $tmp = $name.split(' ')
-    scoop shim add @tmp
+    if (-not ($tmp[0] -and $tmp[1])) {
+        write-host -f yellow "scoop shim: malformed shim: $name"
+        return
+    }
+    if (-not (scoop shim info $tmp[0])) {
+        write-host "adding shim"
+        scoop shim add @tmp
+    }
 }
 
 function gcm_app (
