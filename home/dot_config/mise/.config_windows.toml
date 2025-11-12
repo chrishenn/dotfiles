@@ -27,7 +27,7 @@
 #starship = "latest"
 chezmoi = "latest"
 
-#op = "latest"
+op = "latest"
 #pulumi = "latest"
 #hk = "latest"
 #pkl = "latest"
