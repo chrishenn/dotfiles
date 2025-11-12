@@ -49,7 +49,7 @@ packages:
     scoop:
       - 7zip
       - aria2
-      - brave
+      - googlechrome
       - dark
       - dra
       - everything
@@ -74,5 +74,6 @@ packages:
       - windowsdesktop-runtime-lts
       - wiztree
       - zen-browser
+      - chris/opgui
     scoop_shim:
       - wt $(scoop which wtp)
