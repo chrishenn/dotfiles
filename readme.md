@@ -19,9 +19,10 @@ chezmoi purge
 ```
 
 ```powershell
-$env:OP_SERVICE_ACCOUNT_TOKEN = ''
+scoop install mise vcredist2022
+mise use -g chezmoi op
 $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
-mise use -g chezmoi
+$env:OP_SERVICE_ACCOUNT_TOKEN = ''
 chezmoi init chrishenn --apply --force
 ```
 

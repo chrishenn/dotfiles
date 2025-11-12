@@ -45,6 +45,7 @@ packages:
       - extras
       - versions
       - nerd-fonts
+      - chris https://github.com/chrishenn/scoops
     scoop:
       - 7zip
       - aria2
@@ -73,3 +74,5 @@ packages:
       - windowsdesktop-runtime-lts
       - wiztree
       - zen-browser
+    scoop_shim:
+      - wt $(scoop which wtp)
