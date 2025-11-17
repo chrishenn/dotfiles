@@ -23,8 +23,8 @@
 #yq = "latest"
 #jqp = "latest"
 #yazi = "latest"
-#zoxide = "latest"
-#starship = "latest"
+zoxide = "latest"
+starship = "latest"
 chezmoi = "latest"
 
 op = "latest"
