@@ -70,10 +70,6 @@ packages:
       - uutils-coreutils
       - vcredist2022
       - vscode
-      - windows-terminal-preview
       - windowsdesktop-runtime-lts
       - wiztree
-      - zen-browser
-      - chris/opgui
     scoop_shim:
-      - wt $(scoop which wtp)
