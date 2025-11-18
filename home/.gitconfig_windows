@@ -9,7 +9,7 @@
 [column]
 	ui = auto
 [credential]
-    helper =
+    helper = cache
     modalprompt = false
 [branch]
 	sort = -committerdate
