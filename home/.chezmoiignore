@@ -5,8 +5,6 @@
 !.config/starship.toml
 !.config/mise
 !.config/mise/**
-!.config/1Password
-!.config/1Password/**
 
 .local/share/plasma-systemmonitor
 .local/share/plasma-systemmonitor/**
@@ -26,8 +24,8 @@
 Documents
 Documents/**
 
-appdata
-appdata/**
+AppData
+AppData/**
 
 scoop
 scoop/**
