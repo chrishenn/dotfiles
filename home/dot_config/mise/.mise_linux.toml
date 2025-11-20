@@ -1,5 +1,4 @@
 [tools]
-uv = "latest"
 rust = "stable"
 go = "latest"
 zig = "latest"
@@ -76,6 +75,6 @@ MISE_NPM_BUN = 1
 [tasks.sysupg]
 description = "Full system upgrade"
 run = '''
-    topgrade -y --no-retry --disable uv vscode jetbrains_toolbox jetbrains_pycharm jetbrains_clion \
+    topgrade -y --no-retry --disable vscode jetbrains_toolbox jetbrains_pycharm jetbrains_clion \
         jetbrains_goland jetbrains_rustrover
 '''
