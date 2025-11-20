@@ -75,5 +75,7 @@ MISE_NPM_BUN = 1
 
 [tasks.sysupg]
 description = "Full system upgrade"
-run = '''topgrade -y --no-retry --disable uv vscode jetbrains_toolbox jetbrains_pycharm jetbrains_clion
-            jetbrains_goland jetbrains_rustrover oh-my-bash'''
+run = '''
+    topgrade -y --no-retry --disable uv vscode jetbrains_toolbox jetbrains_pycharm jetbrains_clion \
+        jetbrains_goland jetbrains_rustrover oh-my-bash
+'''
