@@ -24,12 +24,20 @@ alias watch_pod='watch -n 1 kubectl get pods --all-namespaces -o wide'
 alias dc='docker compose'
 alias dlogs='docker compose logs'
 
+function ghlogin {
+echo $(op read "op://homelab/github/credential") | gh auth login -h github.com -p ssh --skip-ssh-key --with-token
+}
+
+function glablogin {
+glab auth login --hostname gitlab.henn.dev -g ssh -a gitlab.henn.dev -p https --token $(op read "op://homelab/Gitlab/pat")
+}
+
 function newrepo {
 git init
 git add --all
 git commit -m "init"
 if ! gh auth status; then
-    $(op read "op://homelab/github/credential") | gh auth login -h github.com --git-protocol=ssh --skip-ssh-key --with-token
+    ghlogin
 fi
 gh newrepo
 }
@@ -39,9 +47,11 @@ git init
 git add --all
 git commit -m "init"
 if ! glab auth status &>/dev/null; then
-    glab auth login --hostname gitlab.henn.dev -g ssh -a gitlab.henn.dev -p https --token $(op read "op://homelab/Gitlab/pat")
+    glablogin
 fi
 glab newrepo
 git push --set-upstream origin --all
 git push --set-upstream origin --tags
 }
+
+
