@@ -12,6 +12,7 @@ function install_code {
 
 function install_code_extensions {
 	# https://github.com/microsoft/vscode/issues/256031 they broke this. how?
+	# HOW IS THIS STILL BROKEN MONTHS LATER??
 	code --install-extension yathink3.carbon-react-color-theme --force
 	code --install-extension pkief.material-icon-theme --force
 	code --install-extension esbenp.prettier-vscode --force
@@ -26,7 +27,7 @@ function main {
 	if ! type -P code; then
 		install_code
 	fi
-	install_code_extensions
+#	install_code_extensions
 
 	if ! dpkg-query -W fonts-firacode; then
 		sudo DEBIAN_FRONTEND=noninteractive apt install -y fonts-firacode
