@@ -1,6 +1,3 @@
-$env:Path += ";$env:USERPROFILE\bin"
-$env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
-
 set-alias cm chezmoi
 
 function newrepo {
@@ -32,3 +29,11 @@ function customDC {
 
 iex (&starship init powershell)
 iex (&{zoxide init powershell | out-string})
+
+# either activate with mise activate or manually put shims on the path, but not both
+# $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
+if (gcm mise) {
+    iex (mise activate pwsh | out-string)
+}
+
+$env:Path += ";$env:USERPROFILE\bin"
