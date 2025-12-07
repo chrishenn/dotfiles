@@ -1,5 +1,5 @@
 $env:Path += ";$env:USERPROFILE\bin"
-$env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
+# $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
 
 set-alias cm chezmoi
 
@@ -32,3 +32,4 @@ function customDC {
 
 iex (&starship init powershell)
 iex (&{zoxide init powershell | out-string})
+iex (mise activate pwsh | out-string)
