@@ -1,3 +1,10 @@
+{{$choices := list "desktop" "server"}}
+{{$hosttype := promptChoiceOnce . "hosttype" "What type of host are you on" $choices}}
+
+[data]
+    hosttype = {{- $hosttype | quote -}}
+
+
 {{ if eq .chezmoi.os "linux"}}
 
 # not worth the squeeze
@@ -8,16 +15,7 @@
 {{end}}
 
 
-{{if eq .chezmoi.os "windows"}}
-
-# [onepassword]
-#     mode = "service"
-
-{{end}}
-
-
-{{$choices := list "desktop" "server"}}
-{{$hosttype := promptChoiceOnce . "hosttype" "What type of host are you on" $choices}}
-
-[data]
-    hosttype = {{- $hosttype | quote -}}
+{{ if eq .hosttype "server" }}
+[onepassword]
+    mode = "service"
+{{- end -}}
