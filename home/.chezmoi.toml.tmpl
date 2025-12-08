@@ -15,7 +15,7 @@
 {{end}}
 
 
-{{ if .hosttype "server" }}
+{{ if eq .hosttype "server" }}
 [onepassword]
     mode = "service"
 {{- end -}}
