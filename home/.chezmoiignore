@@ -15,7 +15,7 @@
 .config/zed/
 
 .config/dolphinrc
-.config/topgrade
+.config/topgrade.toml
 
 .local/
 .oh-my-bash/
