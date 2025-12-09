@@ -12,8 +12,4 @@ HK_MISE = 1
 UV_PREVIEW = 1
 MISE_NPM_BUN = 1
 
-[tasks.sysupg]
-description = "Full system upgrade"
-run = "topgrade"
-
 [tools]
