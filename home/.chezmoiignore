@@ -1,17 +1,23 @@
 {{ if ne .chezmoi.os "linux" -}}
 .chezmoiscripts/linux/**
 
-.config/*
-!.config/starship.toml
-!.config/topgrade.toml
-!.config/mise
-!.config/mise/**
+.config/1Password/
+.config/autostart/
+.config/bottom/
+.config/Code/
+.config/easyeffects/
+.config/fontconfig/
+.config/gh/
+.config/glab-cli/
+.config/input-remapper-2/
+.config/Kvantum/
+.config/nushell/
+.config/zed/
+.config/dolphinrc/
 
-.local/share/plasma-systemmonitor
-.local/share/plasma-systemmonitor/**
-
-.oh-my-bash
-.oh-my-bash/**
+.local/
+.oh-my-bash/
+.ssh/
 
 .bash_aliases
 .bashrc
@@ -27,7 +33,4 @@ Documents/**
 
 AppData
 AppData/**
-
-scoop
-scoop/**
 {{ end -}}
