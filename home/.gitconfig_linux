@@ -33,8 +33,6 @@
 	all = true
 [help]
 	autocorrect = prompt
-[commit]
-	verbose = true
 [rerere]
 	enabled = true
 	autoupdate = true
@@ -62,4 +60,5 @@
 [gpg "ssh"]
     program = "/opt/1Password/op-ssh-sign"
 [commit]
-    gpgsign = true
+	verbose = true
+	gpgsign = false

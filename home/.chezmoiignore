@@ -1,16 +1,17 @@
 {{ if ne .chezmoi.os "linux" -}}
 .chezmoiscripts/linux/**
 
-.config/*
-!.config/starship.toml
-!.config/mise
-!.config/mise/**
+.config/1Password/
+.config/autostart/
+.config/easyeffects/
+.config/fontconfig/
+.config/input-remapper-2/
+.config/Kvantum/
+.config/dolphinrc
+.config/topgrade.toml
 
-.local/share/plasma-systemmonitor
-.local/share/plasma-systemmonitor/**
-
-.oh-my-bash
-.oh-my-bash/**
+.local/
+.oh-my-bash/
 
 .bash_aliases
 .bashrc
@@ -21,12 +22,6 @@
 {{ if ne .chezmoi.os "windows" -}}
 .chezmoiscripts/windows/**
 
-Documents
-Documents/**
-
-AppData
-AppData/**
-
-scoop
-scoop/**
+AppData/
+Documents/
 {{ end -}}

@@ -4,6 +4,7 @@ shellcheck = "latest"
 trufflehog = "latest"
 shfmt = "latest"
 hk = "latest"
+pkl = "latest"
 
 [env]
 # libgit2 doesn't support git extension "refstorage"

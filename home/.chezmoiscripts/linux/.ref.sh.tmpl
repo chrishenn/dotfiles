@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# todo: write something in a real programming language to sync a packages list.yml into system pkg manager
+# note: I'll bet this exists already outside of ansible (preferably no deps, since we're bootstrapping pkgs here)
+# note: the pwsh version of this is under chrishenn/unattend
+# ---
+
 # when the contents of packages.yaml changes, this hash will change, triggering this script to run on next chezmoi apply
 # packages.yaml hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
 

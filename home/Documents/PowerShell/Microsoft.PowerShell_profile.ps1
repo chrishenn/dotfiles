@@ -1,9 +1,7 @@
 set-alias cm chezmoi
 
 function newrepo {
-    gh alias set newrepo 'repo create --private --push --source .' --clobber
-
-	git init
+    git init
 	git add --all
 	git commit -m "init"
     if (-not (gh auth status)) {
@@ -11,7 +9,6 @@ function newrepo {
     }
 	gh newrepo
 }
-
 function customLS {
     [alias('ls')]
     param(
@@ -27,14 +24,14 @@ function customDC {
     docker compose $cmd
 }
 
+if (gcm mise -ea 0) {
+    # either activate with mise activate or manually put shims on the path, but not both
+    # $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
+    iex (mise activate pwsh | out-string)
+}
 if (gcm starship -ea 0) {
     iex (&starship init powershell)
 }
 if (gcm zoxide -ea 0) {
     iex (&{zoxide init powershell | out-string})
-}
-if (gcm mise -ea 0) {
-    # either activate with mise activate or manually put shims on the path, but not both
-    # $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
-    iex (mise activate pwsh | out-string)
 }

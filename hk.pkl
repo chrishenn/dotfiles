@@ -25,7 +25,7 @@ local linters = new Mapping<String, Step> {
     ["gitleaks"] {
         // always check the whole workspace and git history
         workspace_indicator = "hk.pkl"
-        check = "gitleaks detect --no-banner --log-level=fatal --source {{workspace}}"
+        check = "gitleaks detect --no-banner --log-level=fatal --baseline-path gitleaks.json --source {{workspace}}"
     }
 }
 
