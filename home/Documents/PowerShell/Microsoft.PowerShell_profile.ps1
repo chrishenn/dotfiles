@@ -27,13 +27,13 @@ function customDC {
     docker compose $cmd
 }
 
-if (gcm starship) {
+if (gcm starship -ea 0) {
     iex (&starship init powershell)
 }
-if (gcm zoxide) {
+if (gcm zoxide -ea 0) {
     iex (&{zoxide init powershell | out-string})
 }
-if (gcm mise) {
+if (gcm mise -ea 0) {
     # either activate with mise activate or manually put shims on the path, but not both
     # $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"
     iex (mise activate pwsh | out-string)
