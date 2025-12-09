@@ -13,7 +13,9 @@
 .config/Kvantum/
 .config/nushell/
 .config/zed/
-.config/dolphinrc/
+
+.config/dolphinrc
+.config/topgrade
 
 .local/
 .oh-my-bash/
@@ -28,6 +30,6 @@
 {{ if ne .chezmoi.os "windows" -}}
 .chezmoiscripts/windows/**
 
-Documents/
 AppData/
+Documents/
 {{ end -}}
