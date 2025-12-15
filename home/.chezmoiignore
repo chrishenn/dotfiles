@@ -3,23 +3,15 @@
 
 .config/1Password/
 .config/autostart/
-.config/bottom/
-.config/Code/
 .config/easyeffects/
 .config/fontconfig/
-.config/gh/
-.config/glab-cli/
 .config/input-remapper-2/
 .config/Kvantum/
-.config/nushell/
-.config/zed/
-
 .config/dolphinrc
 .config/topgrade.toml
 
 .local/
 .oh-my-bash/
-.ssh/
 
 .bash_aliases
 .bashrc
