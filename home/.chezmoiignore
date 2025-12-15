@@ -1,7 +1,6 @@
 {{ if ne .chezmoi.os "linux" -}}
 .chezmoiscripts/linux/**
 
-.config/1Password/
 .config/autostart/
 .config/bottom/
 .config/Code/
@@ -19,7 +18,6 @@
 
 .local/
 .oh-my-bash/
-.ssh/
 
 .bash_aliases
 .bashrc
