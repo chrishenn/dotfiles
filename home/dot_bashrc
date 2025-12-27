@@ -126,6 +126,4 @@ eval "$(zoxide init bash)"
 source <(op completion bash)
 eval "$(fnox activate bash)"
 
-#source -- ~/.local/share/blesh/ble.sh
-#[[ $- == *i* ]] && source -- $HOME/.local/share/blesh/ble.sh --attach=none --rcfile $HOME/.blerc
 [[ ! ${BLE_VERSION-} ]] || ble-attach
