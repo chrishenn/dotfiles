@@ -8,6 +8,9 @@ case $- in
       *) return;;
 esac
 
+# blesh
+[[ $- == *i* ]] && source -- "$HOME/.local/share/blesh/ble.sh" --attach=none
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -123,4 +126,6 @@ eval "$(zoxide init bash)"
 source <(op completion bash)
 eval "$(fnox activate bash)"
 
-source -- ~/.local/share/blesh/ble.sh
+#source -- ~/.local/share/blesh/ble.sh
+#[[ $- == *i* ]] && source -- $HOME/.local/share/blesh/ble.sh --attach=none --rcfile $HOME/.blerc
+[[ ! ${BLE_VERSION-} ]] || ble-attach
