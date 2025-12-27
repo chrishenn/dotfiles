@@ -122,3 +122,5 @@ eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 source <(op completion bash)
 eval "$(fnox activate bash)"
+
+source -- ~/.local/share/blesh/ble.sh
