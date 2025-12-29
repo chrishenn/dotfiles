@@ -9,7 +9,7 @@ case $- in
 esac
 
 # blesh
-[[ $- == *i* ]] && source -- "$HOME/.local/share/blesh/ble.sh" --attach=none
+#[[ $- == *i* ]] && source -- "$HOME/.local/share/blesh/ble.sh" --attach=none
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -126,4 +126,4 @@ eval "$(zoxide init bash)"
 source <(op completion bash)
 eval "$(fnox activate bash)"
 
-[[ ! ${BLE_VERSION-} ]] || ble-attach
+#[[ ! ${BLE_VERSION-} ]] || ble-attach
