@@ -32,8 +32,6 @@
 	all = true
 [help]
 	autocorrect = prompt
-[commit]
-	verbose = true
 [rerere]
 	enabled = true
 	autoupdate = true
@@ -57,3 +55,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[commit]
+	verbose = true
