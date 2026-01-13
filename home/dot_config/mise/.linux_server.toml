@@ -34,6 +34,7 @@ powershell = "latest"
 zellij = "latest"
 television = "latest"
 
+cargo = "latest"
 "cargo:cargo-binstall" = "latest"
 "cargo:topgrade" = "latest"
 "cargo:dysk" = "latest"

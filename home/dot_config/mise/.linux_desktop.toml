@@ -22,4 +22,3 @@ mask = "latest"
 
 "cargo:tealdeer" = "latest"
 "cargo:tokei" = "latest"
-"ubi:gitlab-org/cli" = { version = "latest", exe = "glab", provider = "gitlab" }

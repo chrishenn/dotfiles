@@ -1,11 +1,11 @@
 {{$choices := list "desktop" "server"}}
-{{$hosttype := promptChoiceOnce . "hosttype" "What type of host are you on" $choices}}
+{{$hosttype := promptChoiceOnce . "hosttype" "What type of host are you on" $choices "server"}}
 
 [data]
     hosttype = {{- $hosttype | quote -}}
 
 
-{{ if eq .chezmoi.os "linux"}}
+{{if eq .chezmoi.os "linux"}}
 
 # not worth the squeeze
 # chezmoi bootstrap: install secrets manager (1password) before rendering further templates
