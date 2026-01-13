@@ -1,0 +1,27 @@
+default_profile = "default"
+cache_path = "/home/chris/.local/share/soar/cache"
+db_path = "/home/chris/.local/share/soar/db"
+bin_path = "/home/chris/.local/share/soar/bin"
+repositories_path = "/home/chris/.local/share/soar/repos"
+portable_dirs = "/home/chris/.local/share/soar/portable-dirs"
+parallel = true
+parallel_limit = 8
+ghcr_concurrency = 8
+search_limit = 20
+cross_repo_updates = false
+install_patterns = [
+    "!*.log",
+    "!SBUILD",
+    "!*.json",
+    "!*.version",
+]
+
+[profile.default]
+root_path = "/home/chris/.local/share/soar"
+packages_path = "/home/chris/.local/share/soar/packages"
+
+[[repositories]]
+name = "soarpkgs"
+url = "https://github.com/pkgforge/soarpkgs/releases/latest/download/metadata-x86_64-linux.sdb.zstd"
+desktop_integration = true
+pubkey = "RWQ109gKujRqohsA7RERlXFfeJi23EcHN3Dz8TxyPAywa5mLw/fbcbU4"

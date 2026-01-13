@@ -16,7 +16,7 @@ pre_sudo = true
 
 # Disable specific steps - same options as the command line flag
 disable = ["vscode", "jetbrains_toolbox", "jetbrains_pycharm", "jetbrains_clion", "jetbrains_goland",
-    "jetbrains_rustrover", "microsoft_store", "system"]
+    "jetbrains_rustrover", "microsoft_store", "system", "containers", "shell"]
 
 # Ignore failures for these steps
 # ignore_failures = ["powershell"]
@@ -220,7 +220,7 @@ no_retry = true
 
 # wsl_update_use_web_download = true
 
-# The default for winget_install_silently is true, 
+# The default for winget_install_silently is true,
 # this example turns off silent install.
 # winget_install_silently = false
 

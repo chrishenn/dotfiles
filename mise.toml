@@ -5,6 +5,8 @@ trufflehog = "latest"
 shfmt = "latest"
 hk = "latest"
 pkl = "latest"
+lychee = "latest"
+prettier = "latest"
 
 [env]
 # libgit2 doesn't support git extension "refstorage"

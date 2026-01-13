@@ -53,6 +53,11 @@ hk uninstall
 
 # run the pre-commit hook
 hk run pre-commit
+
+# gitleaks create baseline
+gitleaks git -r ds.json
+# gitleaks compare to baseline
+gitleaks git -b ds.json
 ```
 
 ### ref
@@ -63,10 +68,6 @@ https://github.com/twpayne/dotfiles/
 
 - you will need to shell into the target machine and manually apply these dotfiles, at least on linux, because the
   apt install commands require interactive sudo elevation - not ideal
-  - would ansible be better suited to installing the packages step?
-  - chezmoi depends on apt packages (1password); so after installing them, ansible could invoke chezmoi
-  - if pkg managers are booted with ansible, we can use chezmoi from mise package
-- todo: switch on desktop vs server in chezmoi.toml
-  - server
-    - install only 1password-cli
-    - embed OP_SERVICE_ACCOUNT_TOKEN
+    - would ansible be better suited to installing the packages step?
+    - chezmoi depends on apt packages (1password); so after installing them, ansible could invoke chezmoi
+    - if pkg managers are booted with ansible, we can use chezmoi from mise package

@@ -1,0 +1,15 @@
+# initialize or update chezmoi dotfiles
+cm:
+    $(op read op://homelab/svc/bash) \
+    ; chezmoi init chrishenn -a --force \
+    ; chezmoi update -a --force
+
+# full upgrade of package manager packages
+topgrade:
+    $(op read op://homelab/svc/bash) \
+    ; topgrade
+
+# 'git clone' all repos for the default user. default dir: ~/
+gclone:
+    $(op read op://homelab/svc/bash) \
+    ; ~/gclone.sh
