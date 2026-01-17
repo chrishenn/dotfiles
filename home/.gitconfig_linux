@@ -1,64 +1,65 @@
 [user]
-	name = chrishenn
-	email = chenn@alum.mit.edu
-	# public key
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBDbuPSH93RCTHG7iTHxg+De/yMWUVB+Q4EFt4llpPDL
+    name = chrishenn
+    email = chenn@alum.mit.edu
+    # public key
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBDbuPSH93RCTHG7iTHxg+De/yMWUVB+Q4EFt4llpPDL
 [alias]
-	st = status -s
-	lol = log --oneline --graph --all
+    st = status -s
+    lol = log --oneline --graph --all
     linecount = "! git log --author=\"$1\" --pretty=tformat: --numstat | gawk '{ add += $1; subs += $2; loc += $1 - $2 } \
         END { printf \"added lines: %s, removed lines: %s, net lines: %s\\n\", add, subs, loc }' #"
 [feature]
-	experimental = true
+    experimental = true
 [column]
-	ui = auto
+    ui = auto
 [branch]
-	sort = -committerdate
+    sort = -committerdate
 [tag]
-	sort = version:refname
+    sort = version:refname
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [diff]
-	algorithm = histogram
-	colorMoved = plain
-	mnemonicPrefix = true
-	renames = true
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
 [push]
-	default = simple
-	autoSetupRemote = true
-	followTags = true
+    default = simple
+    autoSetupRemote = true
+    followTags = true
 [fetch]
-	prune = true
-	pruneTags = true
-	all = true
+    prune = true
+    pruneTags = true
+    all = true
 [help]
-	autocorrect = prompt
+    autocorrect = prompt
 [rerere]
-	enabled = true
-	autoupdate = true
+    enabled = true
+    autoupdate = true
 [core]
     editor = nano
-	excludesfile = ~/.gitignore
-	fsmonitor = true
-	untrackedCache = true
+    excludesfile = ~/.gitignore
+    fsmonitor = true
+    untrackedCache = true
     autocrlf = false
+    ignorecase = false
 [rebase]
-	autoSquash = true
-	autoStash = true
-	updateRefs = true
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
 [merge]
-	conflictstyle = zdiff3
+    conflictstyle = zdiff3
 [pull]
-	rebase = true
+    rebase = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [gpg]
     format = ssh
 [gpg "ssh"]
     program = "/opt/1Password/op-ssh-sign"
 [commit]
-	verbose = true
-	gpgsign = false
+    verbose = true
+    gpgsign = false

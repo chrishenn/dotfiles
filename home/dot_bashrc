@@ -50,12 +50,12 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -103,27 +103,39 @@ fi
 #### user settings
 export GTK_MENU_BAR_ACCEL=""
 
-# source "$HOME/.config/broot/launcher/bash/br"
-# export PATH="$PATH:$HOME/.lmstudio/bin"
+if test -d "$HOME/.local/bin"; then
+	# this is the default mise location when installed via script
+	export PATH="$PATH:$HOME/.local/bin"
+fi
 
-test -f "$HOME/.xmake/profile" && source "$HOME/.xmake/profile"
+if test -f "$HOME/.xmake/profile"; then
+	source "$HOME/.xmake/profile"
+fi
 
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PATH:$PNPM_HOME"
+if test -f "$HOME/.local/share/pnpm"; then
+	export PNPM_HOME="$HOME/.local/share/pnpm"
+	export PATH="$PATH:$PNPM_HOME"
+fi
 
-source "$HOME/.cargo/env"
+if test -f "$HOME/.cargo/env"; then
+	source "$HOME/.cargo/env"
+fi
 
-export PATH="$PATH:$HOME/.pixi/bin"
-eval "$(pixi completion --shell bash)"
+if test -d "$HOME/.pixi"; then
+	export PATH="$PATH:$HOME/.pixi/bin"
+	eval "$(pixi completion --shell bash)"
+fi
 
-export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+if test -d "$HOME/.local/share/JetBrains/Toolbox/scripts"; then
+	export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+fi
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if test -f /home/linuxbrew/.linuxbrew/bin/brew; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
-eval "$($HOME/.local/bin/mise activate bash)"
-eval "$(starship init bash)"
-eval "$(zoxide init bash)"
-source <(op completion bash)
-eval "$(fnox activate bash)"
-
-#[[ ! ${BLE_VERSION-} ]] || ble-attach
+type -P mise >&/dev/null && eval "$(mise activate bash)"
+type -P starship >&/dev/null && eval "$(starship init bash)"
+type -P zoxide >&/dev/null && eval "$(zoxide init bash)"
+type -P op >&/dev/null && source <(op completion bash)
+type -P fnox >&/dev/null && eval "$(fnox activate bash)"

@@ -171,6 +171,7 @@ actionsFace=
 icon=ksysguardd
 loadType=ondemand
 margin=0
+version=1
 
 [page][row-0]
 Title=

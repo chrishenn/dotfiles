@@ -1,13 +1,30 @@
 set-alias cm chezmoi
 
+function ghlogin {
+    if (-not (gh auth status *> $null)) {
+        echo $(op read "op://homelab/github/credential") | gh auth login -h github.com -p ssh --skip-ssh-key --with-token
+    }
+}
+function glablogin {
+    if (-not (glab auth status *> $null)) {
+        glab auth login --hostname gitlab.henn.dev -g ssh -a gitlab.henn.dev -p https --token $(op read "op://homelab/Gitlab/pat")
+    }
+}
 function newrepo {
     git init
-	git add --all
-	git commit -m "init"
-    if (-not (gh auth status)) {
-        $(op read "op://homelab/github/credential") | gh auth login -h github.com --git-protocol=ssh --skip-ssh-key --with-token
-    }
-	gh newrepo
+    git add --all
+    git commit -m "init"
+    ghlogin
+    gh newrepo
+}
+function newrepog {
+    git init
+    git add --all
+    git commit -m "init"
+    glablogin
+    glab newrepo
+    git push --set-upstream origin --all
+    git push --set-upstream origin --tags
 }
 function customLS {
     [alias('ls')]
@@ -23,7 +40,6 @@ function customDC {
     )
     docker compose $cmd
 }
-
 if (gcm mise -ea 0) {
     # either activate with mise activate or manually put shims on the path, but not both
     # $env:Path += ";$env:USERPROFILE\AppData\Local\mise\shims"

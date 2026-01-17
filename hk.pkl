@@ -1,5 +1,5 @@
-amends "package://github.com/jdx/hk/releases/download/v1.24.1/hk@1.24.1#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v1.24.1/hk@1.24.1#/Builtins.pkl"
+amends "package://github.com/jdx/hk/releases/download/v1.35.0/hk@1.35.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.35.0/hk@1.35.0#/Builtins.pkl"
 
 local formatters = new Mapping<String, Step> {
     ["prettier"] = (Builtins.prettier) {
@@ -7,9 +7,15 @@ local formatters = new Mapping<String, Step> {
     }
     ["newlines"] = Builtins.newlines
     ["shfmt"] = Builtins.shfmt
+    ["mixed_line_ending"] = Builtins.mixed_line_ending
+    ["fix_smart_quotes"] = Builtins.fix_smart_quotes
+    ["trailing_whitespace"] = Builtins.trailing_whitespace
 }
 
 local linters = new Mapping<String, Step> {
+//     ["lychee"] = Builtins.lychee
+    ["detect_private_key"] = Builtins.detect_private_key
+    ["check_added_large_files"] = Builtins.check_added_large_files
     ["shellcheck"] = (Builtins.shellcheck) {
         fix = ""
         check = "shellcheck -x --color=always {{files}}"
@@ -25,7 +31,7 @@ local linters = new Mapping<String, Step> {
     ["gitleaks"] {
         // always check the whole workspace and git history
         workspace_indicator = "hk.pkl"
-        check = "gitleaks detect --no-banner --log-level=fatal --baseline-path gitleaks.json --source {{workspace}}"
+        check = "gitleaks git --no-banner --log-level=fatal"
     }
 }
 
@@ -33,11 +39,11 @@ hooks {
     ["pre-commit"] {
         fix = true
         stash = "git"
-        steps = new Mapping<String, Step> {...formatters ...linters}
+        steps = new Mapping<String, Step> { ...formatters ...linters }
     }
     ["check"] {
         fix = false
-        steps = new Mapping<String, Step> {...formatters ...linters}
+        steps = new Mapping<String, Step> { ...formatters ...linters }
     }
     ["fix"] {
         fix = true

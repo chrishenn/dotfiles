@@ -1,15 +1,4 @@
-# "deployment tools" (server)
-
-rust = "stable"
-go = "latest"
-zig = "latest"
-zls = "latest"
-lua = "latest"
-
-node = "latest"
-npm = "latest"
-pnpm = "latest"
-bun = "latest"
+# linux tools (server)
 
 semver = "latest"
 dust = "latest"
@@ -18,7 +7,6 @@ gh = "latest"
 bat = "latest"
 eza = "latest"
 jless = "latest"
-sd = "latest"
 fd = "latest"
 rg = "latest"
 jq = "latest"
@@ -29,13 +17,12 @@ zoxide = "latest"
 starship = "latest"
 
 chezmoi = "latest"
+just = "latest"
 fnox = "latest"
 powershell = "latest"
 zellij = "latest"
 television = "latest"
-
-cargo = "latest"
-"cargo:cargo-binstall" = "latest"
-"cargo:topgrade" = "latest"
-"cargo:dysk" = "latest"
-"cargo:nu" = "latest"
+rclone = "latest"
+aws-cli = "latest"
+ruff = "latest"
+shellcheck = "latest"
