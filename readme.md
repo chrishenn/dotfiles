@@ -53,6 +53,11 @@ hk uninstall
 
 # run the pre-commit hook
 hk run pre-commit
+
+# gitleaks create baseline
+gitleaks git -r ds.json
+# gitleaks compare to baseline
+gitleaks git -b ds.json
 ```
 
 ### ref

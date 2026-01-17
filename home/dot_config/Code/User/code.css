@@ -99,13 +99,13 @@
 }
 
 /* Project title's style at the top. */
-.monaco-workbench
-  .part.titlebar
-  > .titlebar-container
-  > .titlebar-center
-  > .window-title
-  > .command-center
-  .action-item.command-center-center {
+.monaco-workbench,
+.part.titlebar,
+> .titlebar-container,
+> .titlebar-center,
+> .window-title,
+> .command-center,
+.action-item.command-center-center {
   border: none !important;
   background: transparent !important;
 }

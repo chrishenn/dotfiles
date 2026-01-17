@@ -14,12 +14,21 @@ alias ll='eza -aalF'
 alias la='eza -Aa'
 
 alias ka='kubeadm'
+alias ksys='kubectl -n kube-system'
+alias kcal='kubectl -n calico-system'
+
 alias apply='kubectl apply -f'
 alias delete='kubectl delete -f'
-alias pcat='python -m json.tool'
-alias ksys='kubectl -n kube-system'
-alias watch_svc='watch -n 1 kubectl get svc --all-namespaces -o wide'
-alias watch_pod='watch -n 1 kubectl get pods --all-namespaces -o wide'
+
+alias pcat='python3 -m json.tool'
+
+alias get_svc='kubectl get svc -A -o wide'
+alias get_pod='kubectl get pods -A -o wide'
+alias get_node='kubectl get nodes -A -o wide'
+
+alias watch_svc='watch -n 1 kubectl get svc -A -o wide'
+alias watch_pod='watch -n 1 kubectl get pods -A -o wide'
+alias watch_node='watch -n 1 kubectl get nodes -o wide'
 
 alias dc='docker compose'
 alias dlogs='docker compose logs'
