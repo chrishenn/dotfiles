@@ -7,10 +7,11 @@ local formatters = new Mapping<String, Step> {
     }
     ["newlines"] = Builtins.newlines
     ["shfmt"] = Builtins.shfmt
+    ["mixed_line_ending"] = Builtins.mixed_line_ending
+
 }
 
 local linters = new Mapping<String, Step> {
-    ["mixed_line_ending"] = Builtins.mixed_line_ending
     ["shellcheck"] = (Builtins.shellcheck) {
         fix = ""
         check = "shellcheck -x --color=always {{files}}"
@@ -26,7 +27,7 @@ local linters = new Mapping<String, Step> {
     ["gitleaks"] {
         // always check the whole workspace and git history
         workspace_indicator = "hk.pkl"
-        check = "gitleaks detect --no-banner --log-level=fatal -b ds.json --source {{workspace}}"
+        check = "gitleaks git --no-banner --log-level=fatal"
     }
 }
 
