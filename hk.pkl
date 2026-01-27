@@ -1,5 +1,5 @@
-amends "package://github.com/jdx/hk/releases/download/v1.24.1/hk@1.24.1#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v1.24.1/hk@1.24.1#/Builtins.pkl"
+amends "package://github.com/jdx/hk/releases/download/v1.32.0/hk@1.32.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.32.0/hk@1.32.0#/Builtins.pkl"
 
 local formatters = new Mapping<String, Step> {
     ["prettier"] = (Builtins.prettier) {
@@ -8,10 +8,14 @@ local formatters = new Mapping<String, Step> {
     ["newlines"] = Builtins.newlines
     ["shfmt"] = Builtins.shfmt
     ["mixed_line_ending"] = Builtins.mixed_line_ending
-
+    ["fix_smart_quotes"] = Builtins.fix_smart_quotes
+    ["trailing_whitespace"] = Builtins.trailing_whitespace
 }
 
 local linters = new Mapping<String, Step> {
+//     ["lychee"] = Builtins.lychee
+    ["detect_private_key"] = Builtins.detect_private_key
+    ["check_added_large_files"] = Builtins.check_added_large_files
     ["shellcheck"] = (Builtins.shellcheck) {
         fix = ""
         check = "shellcheck -x --color=always {{files}}"
