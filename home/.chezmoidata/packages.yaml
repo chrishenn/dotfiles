@@ -1,10 +1,10 @@
 packages:
   linux:
     flatpak_remote:
-      - "signal-flatpak https://signalflatpak.github.io/signal/signal.flatpakrepo"
-      - "flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+      - 'signal-flatpak https://signalflatpak.github.io/signal/signal.flatpakrepo'
+      - 'flathub https://dl.flathub.org/repo/flathub.flatpakrepo'
     flatpak_custom:
-      - "signal-flatpak org.signal.Signal"
+      - 'signal-flatpak org.signal.Signal'
     flatpak:
       - md.obsidian.Obsidian
       - io.github.cboxdoerfer.FSearch
@@ -13,7 +13,7 @@ packages:
       - com.obsproject.Studio.Plugin.DroidCam
       - com.discordapp.Discord
     flatpak_override:
-      - "--user --device=all com.obsproject.Studio"
+      - '--user --device=all com.obsproject.Studio'
     brews:
       - dra
       - git-filter-repo

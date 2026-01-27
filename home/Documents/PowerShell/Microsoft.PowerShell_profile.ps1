@@ -1,21 +1,21 @@
 set-alias cm chezmoi
 
 function ghlogin {
-    if (-not (gh auth status *>$null)) {
+    if (-not (gh auth status *> $null)) {
         echo $(op read "op://homelab/github/credential") | gh auth login -h github.com -p ssh --skip-ssh-key --with-token
     }
 }
 function glablogin {
-    if (-not (glab auth status *>$null)) {
+    if (-not (glab auth status *> $null)) {
         glab auth login --hostname gitlab.henn.dev -g ssh -a gitlab.henn.dev -p https --token $(op read "op://homelab/Gitlab/pat")
     }
 }
 function newrepo {
     git init
-	git add --all
-	git commit -m "init"
+    git add --all
+    git commit -m "init"
     ghlogin
-	gh newrepo
+    gh newrepo
 }
 function newrepog {
     git init
