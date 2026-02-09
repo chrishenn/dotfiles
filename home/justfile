@@ -1,0 +1,5 @@
+# initialize or update chezmoi dotfiles
+cm:
+    $(op read op://homelab/svc/bash) \
+    ; chezmoi init chrishenn -a --force \
+    ; chezmoi update -a --force
