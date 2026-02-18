@@ -38,7 +38,7 @@ echo $(op read "op://homelab/github/credential") | gh auth login -h github.com -
 }
 
 function glablogin {
-glab auth login --hostname gitlab.henn.dev -g ssh -a gitlab.henn.dev -p https --token $(op read "op://homelab/Gitlab/pat")
+glab auth login --hostname $GITLAB -g ssh -a $GITLAB -p https --token $(op read "op://homelab/gitlab/pat")
 }
 
 function newrepo {
