@@ -5,11 +5,11 @@ glamour_style: dark # [dark, light, notty]
 check_update: true
 last_update_check_timestamp: 2025-12-03T13:29:33-06:00
 display_hyperlinks: false
-host: gitlab.henn.dev
+host: gitlab.chenn.dev
 no_prompt: false
 telemetry: true
 hosts:
-  gitlab.henn.dev:
-    api_host: gitlab.henn.dev
+  gitlab.chenn.dev:
+    api_host: gitlab.chenn.dev
     api_protocol: https
     git_protocol: ssh

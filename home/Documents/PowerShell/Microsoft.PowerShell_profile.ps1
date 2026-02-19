@@ -7,7 +7,7 @@ function ghlogin {
 }
 function glablogin {
     if (-not (glab auth status *> $null)) {
-        glab auth login --hostname gitlab.henn.dev -g ssh -a gitlab.henn.dev -p https --token $(op read "op://homelab/Gitlab/pat")
+        glab auth login --hostname $GITLAB -g ssh -a $GITLAB -p https --token $(op read "op://homelab/Gitlab/pat")
     }
 }
 function newrepo {
