@@ -34,33 +34,64 @@ alias dc='docker compose'
 alias dlogs='docker compose logs'
 
 function ghlogin {
-echo $(op read "op://homelab/github/credential") | gh auth login -h github.com -p ssh --skip-ssh-key --with-token
-}
-
-function glablogin {
-glab auth login --hostname $GITLAB -g ssh -a $GITLAB -p https --token $(op read "op://homelab/gitlab/pat")
+    echo $(op read "op://homelab/github/credential") | gh auth login -h github.com -p ssh --skip-ssh-key --with-token
 }
 
 function newrepo {
-git init
-git add --all
-git commit -m "init"
-if ! gh auth status; then
-    ghlogin
-fi
-gh newrepo
+    git init
+    git add --all
+    git commit -m "init"
+    if ! gh auth status; then
+        ghlogin
+    fi
+    gh newrepo
+}
+
+function glablogin {
+    glab auth login --hostname $GITLAB -g ssh -a $GITLAB -p https --token $(op read "op://homelab/gitlab/pat")
 }
 
 function newrepog {
-git init
-git add --all
-git commit -m "init"
-if ! glab auth status &>/dev/null; then
-    glablogin
-fi
-glab newrepo
-git push --set-upstream origin --all
-git push --set-upstream origin --tags
+    git init
+    git add --all
+    git commit -m "init"
+    if ! glab auth status &>/dev/null; then
+        glablogin
+    fi
+    glab newrepo
+    git push --set-upstream origin --all
+    git push --set-upstream origin --tags
 }
 
+function berglogin {
+    berg auth login --token $(op read "op://homelab/forgejo/pat")
+}
 
+function bergauthstatus {
+    auth=$(berg auth list --output-mode json)
+
+    # if we know of any hosts, the top object will be an array
+    toptype=$(echo "$auth" | jq -r '. | type')
+    if [ "$toptype" != "array" ]; then
+        false; return
+    fi
+
+    # checks login status for only the first host - assumes I will only ever use one
+    status=$(echo "$auth" | jq -r '.[0]["logged_in"]')
+    if [ $status = true ]; then
+        true; return
+    fi
+    false; return
+}
+
+function newrepob {
+    git init
+    git add --all
+    git commit -m "init"
+    if ! (bergauthstatus); then
+        berglogin
+    fi
+    glab newrepo
+    git push --set-upstream origin --all
+    git push --set-upstream origin --tags
+}

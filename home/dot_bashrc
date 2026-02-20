@@ -104,34 +104,34 @@ fi
 export GTK_MENU_BAR_ACCEL=""
 
 if test -d "$HOME/.local/bin"; then
-	# this is the default mise location when installed via script
-	export PATH="$PATH:$HOME/.local/bin"
+    # this is the default mise location when installed via script
+    export PATH="$PATH:$HOME/.local/bin"
 fi
 
 if test -f "$HOME/.xmake/profile"; then
-	source "$HOME/.xmake/profile"
+    source "$HOME/.xmake/profile"
 fi
 
 if test -f "$HOME/.local/share/pnpm"; then
-	export PNPM_HOME="$HOME/.local/share/pnpm"
-	export PATH="$PATH:$PNPM_HOME"
+    export PNPM_HOME="$HOME/.local/share/pnpm"
+    export PATH="$PATH:$PNPM_HOME"
 fi
 
 if test -f "$HOME/.cargo/env"; then
-	source "$HOME/.cargo/env"
+    source "$HOME/.cargo/env"
 fi
 
 if test -d "$HOME/.pixi"; then
-	export PATH="$PATH:$HOME/.pixi/bin"
-	eval "$(pixi completion --shell bash)"
+    export PATH="$PATH:$HOME/.pixi/bin"
+    eval "$(pixi completion --shell bash)"
 fi
 
 if test -d "$HOME/.local/share/JetBrains/Toolbox/scripts"; then
-	export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+    export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 fi
 
 if test -f /home/linuxbrew/.linuxbrew/bin/brew; then
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 type -P mise >&/dev/null && eval "$(mise activate bash)"
