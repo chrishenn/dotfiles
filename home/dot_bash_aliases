@@ -107,13 +107,8 @@ function flogin {
 }
 
 function fnewrepo {
-    flogin
-
-    git init
-    git add --all
-    git commit -m "init"
-
     # "create on push" is enabled
+    git init && git add --all && git commit -m "init"
     repo=$(basename $PWD)
     git remote add origin ssh://git@forgejo.chenn.dev:2424/chris/$repo.git
     git push --set-upstream origin --all
