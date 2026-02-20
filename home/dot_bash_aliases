@@ -47,27 +47,25 @@ function newrepo {
     gh newrepo
 }
 
-function glablogin {
-    glab auth login --hostname $GITLAB -g ssh -a $GITLAB -p https --token $(op read "op://homelab/gitlab/pat")
+function glogin {
+    if ! glab auth status &>/dev/null; then
+        glab auth login --hostname $GITLAB -g ssh -a $GITLAB -p https --token $(op read "op://homelab/gitlab/pat")
+    fi
 }
 
-function newrepog {
+function gnewrepo {
+    glogin
+
     git init
     git add --all
     git commit -m "init"
-    if ! glab auth status &>/dev/null; then
-        glablogin
-    fi
+
     glab newrepo
     git push --set-upstream origin --all
     git push --set-upstream origin --tags
 }
 
-function berglogin {
-    berg auth login --token $(op read "op://homelab/forgejo/pat")
-}
-
-function bergauthstatus {
+function bauth {
     auth=$(berg auth list --output-mode json)
 
     # if we know of any hosts, the top object will be an array
@@ -84,14 +82,42 @@ function bergauthstatus {
     false; return
 }
 
-function newrepob {
+function blogin {
+    if ! (bauth); then
+        berg auth login --token $(op read "op://homelab/forgejo/pat")
+    fi
+}
+
+function bnewrepo {
+    blogin
+
     git init
     git add --all
     git commit -m "init"
-    if ! (bergauthstatus); then
-        berglogin
-    fi
-    glab newrepo
+
+    repo=$(basename $PWD)
+    berg repo create --default-branch main -p private -n $repo -d $repo || return 1
+    git remote add origin ssh://git@forgejo.chenn.dev:2424/chris/$repo.git
     git push --set-upstream origin --all
     git push --set-upstream origin --tags
 }
+
+function flogin {
+    fj auth add-key chris $(op read "op://homelab/forgejo/pat") -H forgejo.chenn.dev
+}
+
+function fnewrepo {
+    flogin
+
+    git init
+    git add --all
+    git commit -m "init"
+
+    # "create on push" is enabled
+    repo=$(basename $PWD)
+    git remote add origin ssh://git@forgejo.chenn.dev:2424/chris/$repo.git
+    git push --set-upstream origin --all
+    git push --set-upstream origin --tags
+}
+
+
