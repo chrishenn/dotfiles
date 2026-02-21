@@ -48,13 +48,13 @@ function newrepo {
 }
 
 function glogin {
-    if ! glab auth status &>/dev/null; then
-        glab auth login --hostname $GITLAB -g ssh -a $GITLAB -p https --token $(op read "op://homelab/gitlab/pat")
-    fi
+	glab auth login --hostname $GITLAB -g ssh -a $GITLAB -p https --token $(op read "op://homelab/gitlab/pat")
 }
 
 function gnewrepo {
-    glogin
+    if ! glab auth status &>/dev/null; then
+        glogin
+    fi
 
     git init
     git add --all
@@ -83,13 +83,13 @@ function bauth {
 }
 
 function blogin {
-    if ! (bauth); then
-        berg auth login --token $(op read "op://homelab/forgejo/pat")
-    fi
+	berg auth login --token $(op read "op://homelab/forgejo/pat")
 }
 
 function bnewrepo {
-    blogin
+	if ! (bauth); then
+    	blogin
+    fi
 
     git init
     git add --all
