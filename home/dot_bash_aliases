@@ -109,3 +109,7 @@ function fnewrepo {
     git remote add origin "ssh://git@$BERG_BASE_URL:$BERG_SSH_PORT/$BERG_USR/$repo.git"
     git push --set-upstream origin --all || return 1
 }
+
+function dlogin_gitlab {
+	echo $(op read "op://homelab/gitlab/pat") | docker login -u chris  $(op read "op://homelab/gitlab/host") --password-stdin
+}
