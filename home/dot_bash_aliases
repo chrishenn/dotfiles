@@ -33,6 +33,8 @@ alias watch_node='watch -n 1 kubectl get nodes -o wide'
 alias dc='docker compose'
 alias dlogs='docker compose logs'
 
+# todo: for these below, allow overrides for env-vars and pat token paths
+
 function ghlogin {
     echo $(op read "op://homelab/github/credential") | gh auth login -h github.com -p ssh --skip-ssh-key --with-token
 }
@@ -45,6 +47,8 @@ function newrepo {
     git init && git add --all && git commit -m "init"
     gh newrepo
 }
+
+# todo: for these below, add checks for the env-vars they rely on
 
 function glogin {
 	glab auth login --hostname $GITLAB_HOST -g ssh -a $GITLAB_HOST -p https --token $(op read "op://homelab/gitlab/pat")
