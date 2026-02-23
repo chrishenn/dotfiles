@@ -38,17 +38,16 @@ function ghlogin {
 }
 
 function newrepo {
-    git init
-    git add --all
-    git commit -m "init"
     if ! gh auth status; then
         ghlogin
     fi
+
+    git init && git add --all && git commit -m "init"
     gh newrepo
 }
 
 function glogin {
-	glab auth login --hostname $GITLAB -g ssh -a $GITLAB -p https --token $(op read "op://homelab/gitlab/pat")
+	glab auth login --hostname $GITLAB_HOST -g ssh -a $GITLAB_HOST -p https --token $(op read "op://homelab/gitlab/pat")
 }
 
 function gnewrepo {
@@ -56,13 +55,8 @@ function gnewrepo {
         glogin
     fi
 
-    git init
-    git add --all
-    git commit -m "init"
-
+    git init && git add --all && git commit -m "init"
     glab newrepo
-    git push --set-upstream origin --all
-    git push --set-upstream origin --tags
 }
 
 function bauth {
@@ -87,32 +81,27 @@ function blogin {
 }
 
 function bnewrepo {
+	# "create on push" is NOT enabled - create repo using codeberg-cli
 	if ! (bauth); then
     	blogin
     fi
 
-    git init
-    git add --all
-    git commit -m "init"
+    git init && git add --all && git commit -m "init"
 
     repo=$(basename $PWD)
     berg repo create --default-branch main -p private -n $repo -d $repo || return 1
-    git remote add origin ssh://git@forgejo.chenn.dev:2424/chris/$repo.git
-    git push --set-upstream origin --all
-    git push --set-upstream origin --tags
+    git remote add origin "ssh://git@$BERG_BASE_URL:$BERG_SSH_PORT/$BERG_USR/$repo.git"
+    git push --set-upstream origin --all || return 1
 }
 
 function flogin {
-    fj auth add-key chris $(op read "op://homelab/forgejo/pat") -H forgejo.chenn.dev
+    fj auth add-key $BERG_USR $(op read "op://homelab/forgejo/pat") -H $BERG_BASE_URL
 }
 
 function fnewrepo {
     # "create on push" is enabled
     git init && git add --all && git commit -m "init"
     repo=$(basename $PWD)
-    git remote add origin ssh://git@forgejo.chenn.dev:2424/chris/$repo.git
-    git push --set-upstream origin --all
-    git push --set-upstream origin --tags
+    git remote add origin "ssh://git@$BERG_BASE_URL:$BERG_SSH_PORT/$BERG_USR/$repo.git"
+    git push --set-upstream origin --all || return 1
 }
-
-
