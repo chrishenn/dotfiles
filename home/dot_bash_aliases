@@ -33,6 +33,8 @@ alias watch_node='watch -n 1 kubectl get nodes -o wide'
 alias dc='docker compose'
 alias dlogs='docker compose logs'
 
+alias t='talosctl'
+
 # todo: for these below, allow overrides for env-vars and pat token paths
 
 function ghlogin {
