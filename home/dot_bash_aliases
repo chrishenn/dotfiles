@@ -34,6 +34,7 @@ alias dc='docker compose'
 alias dlogs='docker compose logs'
 
 alias t='talosctl'
+alias pup='pulumi up -y'
 
 # todo: for these below, allow overrides for env-vars and pat token paths
 
