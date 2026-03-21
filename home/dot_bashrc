@@ -134,8 +134,13 @@ if test -f /home/linuxbrew/.linuxbrew/bin/brew; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+if test -f "$HOME/.local/share/soar/bin"; then
+	export PATH="$PATH:$HOME/.local/share/soar/bin"
+fi
+
 type -P mise >&/dev/null && eval "$(mise activate bash)"
 type -P starship >&/dev/null && eval "$(starship init bash)"
 type -P zoxide >&/dev/null && eval "$(zoxide init bash)"
 type -P op >&/dev/null && source <(op completion bash)
 type -P fnox >&/dev/null && eval "$(fnox activate bash)"
+
