@@ -134,7 +134,7 @@ if test -f /home/linuxbrew/.linuxbrew/bin/brew; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-if test -f "$HOME/.local/share/soar/bin"; then
+if test -d "$HOME/.local/share/soar/bin"; then
 	export PATH="$PATH:$HOME/.local/share/soar/bin"
 fi
 
