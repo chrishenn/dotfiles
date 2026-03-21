@@ -1,2 +1,4 @@
 theme = tokyonight_moon
 font-family = Fira Code Retina
+background-opacity = 0.80
+background-blur = true
