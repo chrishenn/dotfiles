@@ -1,4 +1,12 @@
-theme = tokyonight_night
+theme = Dark Pastel
+# theme = Dracula+
+# theme = Midnight In Mojave
+# theme = Monokai Vivid
+# theme = Niji
+# theme = Raycast Dark
+# theme = Vercel
+# theme = Xcode Dark hc
+
 font-family = Fira Code Retina
 background-opacity = 0.80
 background-blur = true
