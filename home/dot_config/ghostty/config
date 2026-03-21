@@ -1,1 +1,2 @@
-theme = "tokyonight_moon"
+theme = tokyonight_moon
+font-family = Fira Code Retina
