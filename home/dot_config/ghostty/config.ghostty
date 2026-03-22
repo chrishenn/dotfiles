@@ -1,12 +1,12 @@
-theme = Dark Pastel
+# theme = Dark Pastel
 # theme = Dracula+
 # theme = Midnight In Mojave
-# theme = Monokai Vivid
+theme = Monokai Vivid
 # theme = Niji
 # theme = Raycast Dark
 # theme = Vercel
 # theme = Xcode Dark hc
 
 font-family = Fira Code Retina
-background-opacity = 0.50
+background-opacity = 0.60
 background-blur = true
