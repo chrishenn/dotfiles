@@ -8,5 +8,5 @@ theme = Dark Pastel
 # theme = Xcode Dark hc
 
 font-family = Fira Code Retina
-background-opacity = 0.80
+background-opacity = 0.50
 background-blur = true
