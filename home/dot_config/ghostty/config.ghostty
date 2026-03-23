@@ -10,3 +10,4 @@ theme = Monokai Vivid
 font-family = Fira Code Retina
 background-opacity = 0.60
 background-blur = true
+confirm-close-surface = false
