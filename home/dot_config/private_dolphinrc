@@ -15,6 +15,7 @@ PreviewSize=32
 [General]
 ConfirmClosingMultipleTabs=false
 ConfirmClosingTerminalRunningProgram=false
+DoubleClickViewAction=none
 ShowFullPath=true
 ShowFullPathInTitlebar=true
 ShowStatusBar=Disabled
