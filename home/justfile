@@ -3,3 +3,7 @@ cm:
     $(op read op://homelab/svc/bash) \
     ; chezmoi init chrishenn -a --force \
     ; chezmoi update -a --force
+
+topgrade:
+    $(op read op://homelab/svc/bash) \
+    topgrade
