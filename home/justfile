@@ -6,4 +6,4 @@ cm:
 
 topgrade:
     $(op read op://homelab/svc/bash) \
-    topgrade
+    ; topgrade
