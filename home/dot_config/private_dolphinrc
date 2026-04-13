@@ -18,11 +18,14 @@ ShowFullPath=true
 ShowFullPathInTitlebar=true
 ShowStatusBar=Disabled
 Version=202
-ViewPropsTimestamp=2025,10,4,22,15,53.326
+ViewPropsTimestamp=2026,4,13,16,46,33.799
 
 [KFileDialog Settings]
 Places Icons Auto-resize=false
 Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
 
 [Notification Messages]
 ShowPasteHugeTextWarning=false
