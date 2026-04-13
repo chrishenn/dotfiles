@@ -1,5 +1,3 @@
-MenuBar=Disabled
-
 [ContentDisplay]
 DirectorySizeMode=ContentSize
 
@@ -26,12 +24,10 @@ ViewPropsTimestamp=2025,10,4,22,15,53.326
 Places Icons Auto-resize=false
 Places Icons Static Size=22
 
-[MainWindow]
-MenuBar=Disabled
-
 [Notification Messages]
 ShowPasteHugeTextWarning=false
 warnAboutRisksBeforeActingAsAdmin=false
 
 [PreviewSettings]
 Plugins=appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gdk-pixbuf-thumbnailer,gsthumbnail,rawthumbnail,librsvg,svgthumbnail,ffmpegthumbs
+soar
