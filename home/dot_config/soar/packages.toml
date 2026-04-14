@@ -6,13 +6,13 @@ binary_only = false
 ghostty = "*"
 
 fluxer = {
-    url = "https://api.fluxer.app/dl/desktop/stable/linux/x64/latest/appimage",
+    url = "https://api.fluxer.app/dl/desktop/stable/linux/x64/{version}/appimage",
     version = "0.0.8",
     version_command = "curl -sI https://api.fluxer.app/dl/desktop/stable/linux/x64/latest/appimage | grep -oP 'fluxer-stable-\\K[0-9.]+'"
 }
 
 arduino = {
-    url = "https://github.com/arduino/arduino-ide/releases/download/2.3.8/arduino-ide_2.3.8_Linux_64bit.AppImage",
+    url = "https://github.com/arduino/arduino-ide/releases/download/{version}/arduino-ide_{version}_Linux_64bit.AppImage",
     version = "2.3.8",
     version_command = "curl -qfsSL https://api.github.com/repos/arduino/arduino-ide/releases/latest | jq -r '.tag_name'"
 }
@@ -21,4 +21,7 @@ kicad = {
     url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-10.0.0-1-x86_64.AppImage.tar",
     hooks = {post_download = "7z x kicad"},
     version = "10.0.0"
+    version_command = "curl -qfsSL https://www.kicad.org/download/linux/ | grep -E 'Current Version: [0-9.-]+'"
 }
+
+cat tmp.html | grep -zoP 'Current Version:.*\s*[\d]+\.[\d]+.[\d]+-[\d]' | grep -zoP [\d]+\.[\d]+.[\d]+-[\d]
