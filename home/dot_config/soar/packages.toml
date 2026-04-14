@@ -5,21 +5,18 @@ binary_only = false
 [packages]
 ghostty = "*"
 
-fluxer = {
-    url = "https://api.fluxer.app/dl/desktop/stable/linux/x64/{version}/appimage",
-    version = "0.0.8",
-    version_command = "curl -sI https://api.fluxer.app/dl/desktop/stable/linux/x64/latest/appimage | grep -oP 'fluxer-stable-\\K[0-9.]+'"
-}
+[packages.kicad]
+url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-{version}-x86_64.AppImage.tar"
+hooks = {post_download = "7z x kicad"}
+version_command = "curl -qfsSL https://www.kicad.org/download/linux/ | rg -m 1 '[\\d]+\\.[\\d]+\\.[\\d]+-[\\d]'"
+version = "10.0.0-1"
 
-arduino = {
-    url = "https://github.com/arduino/arduino-ide/releases/download/{version}/arduino-ide_{version}_Linux_64bit.AppImage",
-    version = "2.3.8",
-    version_command = "curl -qfsSL https://api.github.com/repos/arduino/arduino-ide/releases/latest | jq -r '.tag_name'"
-}
+[packages.arduino]
+url = "https://github.com/arduino/arduino-ide/releases/download/{version}/arduino-ide_{version}_Linux_64bit.AppImage"
+version = "2.3.8"
+version_command = "curl -qfsSL https://api.github.com/repos/arduino/arduino-ide/releases/latest | jq -r '.tag_name'"
 
-kicad = {
-    url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-{version}-x86_64.AppImage.tar",
-    hooks = {post_download = "7z x kicad"},
-    version_command = "curl -qfsSL https://www.kicad.org/download/linux/ | rg -m 1 '[\\d]+\\.[\\d]+\\.[\\d]+-[\\d]'",
-    version = "10.0.0-1"
-}
+[packages.fluxer]
+url = "https://api.fluxer.app/dl/desktop/stable/linux/x64/{version}/appimage"
+version = "0.0.8"
+version_command = "curl -sI https://api.fluxer.app/dl/desktop/stable/linux/x64/latest/appimage | grep -oP 'fluxer-stable-\\K[0-9.]+'"

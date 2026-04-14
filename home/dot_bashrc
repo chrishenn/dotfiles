@@ -104,7 +104,6 @@ fi
 export GTK_MENU_BAR_ACCEL=""
 
 if test -d "$HOME/.local/bin"; then
-    # this is the default mise location when installed via script
     export PATH="$PATH:$HOME/.local/bin"
 fi
 
@@ -123,7 +122,6 @@ fi
 
 if test -d "$HOME/.pixi"; then
     export PATH="$PATH:$HOME/.pixi/bin"
-    eval "$(pixi completion --shell bash)"
 fi
 
 if test -d "$HOME/.local/share/JetBrains/Toolbox/scripts"; then
@@ -143,4 +141,4 @@ type -P starship >&/dev/null && eval "$(starship init bash)"
 type -P zoxide >&/dev/null && eval "$(zoxide init bash)"
 type -P op >&/dev/null && source <(op completion bash)
 type -P fnox >&/dev/null && eval "$(fnox activate bash)"
-
+type -P pixi >&/dev/null && eval "$(pixi completion --shell bash)"
