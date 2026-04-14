@@ -18,10 +18,8 @@ arduino = {
 }
 
 kicad = {
-    url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-10.0.0-1-x86_64.AppImage.tar",
+    url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-{version}-x86_64.AppImage.tar",
     hooks = {post_download = "7z x kicad"},
-    version = "10.0.0"
-    version_command = "curl -qfsSL https://www.kicad.org/download/linux/ | grep -E 'Current Version: [0-9.-]+'"
+    version_command = "curl -qfsSL https://www.kicad.org/download/linux/ | rg -m 1 '[\\d]+\\.[\\d]+\\.[\\d]+-[\\d]'",
+    version = "10.0.0-1"
 }
-
-cat tmp.html | grep -zoP 'Current Version:.*\s*[\d]+\.[\d]+.[\d]+-[\d]' | grep -zoP [\d]+\.[\d]+.[\d]+-[\d]
