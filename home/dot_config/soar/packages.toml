@@ -8,8 +8,8 @@ ghostty = "*"
 [packages.kicad]
 url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-{version}-x86_64.AppImage.tar"
 hooks = {post_download = "7z x kicad"}
-version_command = "curl -qfsSL https://www.kicad.org/download/linux/ | rg -m 1 '[\\d]+\\.[\\d]+\\.[\\d]+-[\\d]'"
 version = "10.0.0-1"
+version_command = "curl -qfsSL https://www.kicad.org/download/linux/ | rg -m 1 '[\\d]+\\.[\\d]+\\.[\\d]+-[\\d]'"
 
 [packages.arduino]
 url = "https://github.com/arduino/arduino-ide/releases/download/{version}/arduino-ide_{version}_Linux_64bit.AppImage"
