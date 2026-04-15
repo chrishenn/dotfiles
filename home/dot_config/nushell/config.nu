@@ -9,11 +9,6 @@ alias grep = grep --color = always
 alias fgrep = fgrep --color = always
 alias egrep = egrep --color = always
 
-alias ls = eza -aalo
-alias l = eza -aalo
-alias ll = eza -aalFo
-alias la = eza -Aao
-
 alias ka = kubeadm
 alias ksys = kubectl -n kube-system
 alias kcal = kubectl -n calico-system
