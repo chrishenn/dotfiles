@@ -41,6 +41,7 @@ alias pup = pulumi up -y
 $env.EDITOR = 'nano'
 $env.config.buffer_editor = 'nano'
 $env.config.show_banner = false
+$env.SSH_AUTH_SOCK = ('~/.1password/agent.sock' | path expand)
 
 # functions
 def watch [cmd: string, interval: duration = 1sec] {
@@ -63,10 +64,22 @@ def newrepo [] {
 
 # tool init
 use std/util "path add"
+mkdir ($nu.data-dir | path join 'vendor/autoload')
 
-if ('~/.zoxide.nu' | path exists) { source '~/.zoxide.nu' }
+if ('~/.local/share/pnpm' | path exists) {
+    path add '~/.local/share/pnpm'
+    $env.PNPM_HOME = ('~/.local/share/pnpm' | path expand)
+}
 if ('~/.cargo/bin' | path exists) { path add '~/.cargo/bin' }
+if ('~/.pixi/bin' | path exists) { path add '~/.pixi/bin' }
+if ('~/.local/share/JetBrains/Toolbox/scripts' | path exists) { path add '~/.local/share/JetBrains/Toolbox/scripts' }
+if ('/home/linuxbrew/.linuxbrew/bin/brew' | path exists) { path add '/home/linuxbrew/.linuxbrew/bin/brew' }
+if ('~/.local/share/soar/bin' | path exists) { path add '~/.local/share/soar/bin' }
 
-if (which starship | is-not-empty) { nu -c (starship init nu) }
+if (which pixi | is-not-empty) { pixi completion --shell nushell | save -f ($nu.data-dir | path join 'vendor/autoload/pixi.nu') }
+if (which mise | is-not-empty) { ^mise activate nu | save -f ($nu.data-dir | path join 'vendor/autoload/mise.nu') }
 
-# SSH_AUTH_SOCK
+# provided by mise; load mise first
+if (which zoxide | is-not-empty) { zoxide init nushell | save -f ($nu.data-dir | path join 'vendor/autoload/zoxide.nu') }
+if (which starship | is-not-empty) { starship init nu | save -f ($nu.data-dir | path join 'vendor/autoload/starship.nu') }
+if (which fnox | is-not-empty) { fnox activate nu | save -f ($nu.data-dir | path join 'vendor/autoload/fnox.nu') }

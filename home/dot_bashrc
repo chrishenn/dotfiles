@@ -120,7 +120,7 @@ if test -f "$HOME/.cargo/env"; then
     source "$HOME/.cargo/env"
 fi
 
-if test -d "$HOME/.pixi"; then
+if test -d "$HOME/.pixi/bin"; then
     export PATH="$PATH:$HOME/.pixi/bin"
 fi
 
@@ -128,7 +128,7 @@ if test -d "$HOME/.local/share/JetBrains/Toolbox/scripts"; then
     export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 fi
 
-if test -f /home/linuxbrew/.linuxbrew/bin/brew; then
+if test -f "/home/linuxbrew/.linuxbrew/bin/brew"; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
