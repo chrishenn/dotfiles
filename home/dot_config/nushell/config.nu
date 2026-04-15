@@ -33,10 +33,20 @@ alias t = talosctl
 alias pup = pulumi up -y
 
 # settings
+use std/config dark-theme
+$env.config = {
+    buffer_editor: 'nano'
+    show_banner: false
+    table: {mode: 'none'}
+    hooks: {display_output: 'table'}
+    color_config: (dark-theme)
+    completions: {algorithm: 'fuzzy'}
+}
+
+# env
 $env.EDITOR = 'nano'
-$env.config.buffer_editor = 'nano'
-$env.config.show_banner = false
 $env.SSH_AUTH_SOCK = ('~/.1password/agent.sock' | path expand)
+if (which vivid | is-not-empty) {$env.LS_COLORS = (vivid generate tokyonight-night)}
 
 # functions
 def watch [cmd: string, interval: duration = 1sec] {
@@ -57,7 +67,7 @@ def newrepo [] {
     ^gh newrepo
 }
 
-# tool init
+# tools
 use std/util "path add"
 mkdir ($nu.data-dir | path join 'vendor/autoload')
 
@@ -71,6 +81,7 @@ if ('~/.local/share/JetBrains/Toolbox/scripts' | path exists) { path add '~/.loc
 if ('/home/linuxbrew/.linuxbrew/bin/brew' | path exists) { path add '/home/linuxbrew/.linuxbrew/bin/brew' }
 if ('~/.local/share/soar/bin' | path exists) { path add '~/.local/share/soar/bin' }
 
+# package managers; load first
 if (which pixi | is-not-empty) { pixi completion --shell nushell | save -f ($nu.data-dir | path join 'vendor/autoload/pixi.nu') }
 if (which mise | is-not-empty) { ^mise activate nu | save -f ($nu.data-dir | path join 'vendor/autoload/mise.nu') }
 
