@@ -144,4 +144,4 @@ type -P fnox >&/dev/null && eval "$(fnox activate bash)"
 type -P pixi >&/dev/null && eval "$(pixi completion --shell bash)"
 
 # requires blesh
-type -P atuin && eval "$(atuin init bash)"
+#type -P atuin && eval "$(atuin init bash)"
