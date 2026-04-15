@@ -13,8 +13,10 @@ jq = "latest"
 yq = "latest"
 jqp = "latest"
 yazi = "latest"
-zoxide = "latest"
+
 starship = "latest"
+zoxide = "latest"
+atuin = "latest"
 
 chezmoi = "latest"
 just = "latest"
