@@ -89,4 +89,4 @@ if (which mise | is-not-empty) { ^mise activate nu | save -f ($nu.data-dir | pat
 if (which zoxide | is-not-empty) { zoxide init nushell | save -f ($nu.data-dir | path join 'vendor/autoload/zoxide.nu') }
 if (which starship | is-not-empty) { starship init nu | save -f ($nu.data-dir | path join 'vendor/autoload/starship.nu') }
 if (which fnox | is-not-empty) { fnox activate nu | save -f ($nu.data-dir | path join 'vendor/autoload/fnox.nu') }
-if (which atuin | is-not-empty) { atuin init nu | save -f ($nu.data-dir | path join 'vendor/autoload/atuin.nu') }
+if (which atuin | is-not-empty) { atuin init nu --disable-up-arrow  | save -f ($nu.data-dir | path join 'vendor/autoload/atuin.nu') }
