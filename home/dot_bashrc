@@ -142,3 +142,6 @@ type -P zoxide >&/dev/null && eval "$(zoxide init bash)"
 type -P op >&/dev/null && source <(op completion bash)
 type -P fnox >&/dev/null && eval "$(fnox activate bash)"
 type -P pixi >&/dev/null && eval "$(pixi completion --shell bash)"
+
+# requires blesh
+type -P atuin && eval "$(atuin init bash)"
