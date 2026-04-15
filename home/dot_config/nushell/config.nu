@@ -5,10 +5,6 @@ alias m = mise
 alias k = kubectl
 alias cm = chezmoi
 
-alias grep = grep --color = always
-alias fgrep = fgrep --color = always
-alias egrep = egrep --color = always
-
 alias ls = ls -a
 alias ll = ls -al
 alias lf = ls -af
