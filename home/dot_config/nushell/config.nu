@@ -27,9 +27,9 @@ alias get_svc = kubectl get svc -A -o wide
 alias get_pod = kubectl get pods -A -o wide
 alias get_node = kubectl get nodes -A -o wide
 
-alias watch_svc = watch -n 1 kubectl get svc -A -o wide
-alias watch_pod = watch -n 1 kubectl get pods -A -o wide
-alias watch_node = watch -n 1 kubectl get nodes -o wide
+alias watch_svc = watch 'kubectl get svc -A -o wide'
+alias watch_pod = watch 'kubectl get pods -A -o wide'
+alias watch_node = watch 'kubectl get nodes -o wide'
 
 alias dc = docker compose
 alias dlogs = docker compose logs
@@ -43,7 +43,7 @@ $env.config.buffer_editor = 'nano'
 $env.config.show_banner = false
 
 # functions
-def watch [cmd: string, interval: duration  =  1sec] {
+def watch [cmd: string, interval: duration = 1sec] {
     loop {
         clear
         nu -c $cmd
@@ -67,4 +67,6 @@ use std/util "path add"
 if ('~/.zoxide.nu' | path exists) { source '~/.zoxide.nu' }
 if ('~/.cargo/bin' | path exists) { path add '~/.cargo/bin' }
 
-if (which starship | is-not-empty) { starship init nushell }
+if (which starship | is-not-empty) { nu -c (starship init nu) }
+
+# SSH_AUTH_SOCK
