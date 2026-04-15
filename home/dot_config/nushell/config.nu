@@ -9,6 +9,10 @@ alias grep = grep --color = always
 alias fgrep = fgrep --color = always
 alias egrep = egrep --color = always
 
+alias ls = ls -a
+alias ll = ls -al
+alias lf = ls -af
+
 alias ka = kubeadm
 alias ksys = kubectl -n kube-system
 alias kcal = kubectl -n calico-system
@@ -90,3 +94,4 @@ if (which zoxide | is-not-empty) { zoxide init nushell | save -f ($nu.data-dir |
 if (which starship | is-not-empty) { starship init nu | save -f ($nu.data-dir | path join 'vendor/autoload/starship.nu') }
 if (which fnox | is-not-empty) { fnox activate nu | save -f ($nu.data-dir | path join 'vendor/autoload/fnox.nu') }
 if (which atuin | is-not-empty) { atuin init nu --disable-up-arrow  | save -f ($nu.data-dir | path join 'vendor/autoload/atuin.nu') }
+ls
