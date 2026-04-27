@@ -2,8 +2,8 @@
 profile = "default"
 binary_only = false
 
-[packages]
-ghostty = "*"
+[packages.ghostty]
+version = "*"
 
 [packages.kicad]
 url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-{version}-x86_64.AppImage.tar"
