@@ -7,3 +7,8 @@ cm:
 topgrade:
     $(op read op://homelab/svc/bash) \
     ; topgrade
+
+# 'git clone' all repos for the default user. default dir: ~/
+gclone:
+    $(op read op://homelab/svc/bash) \
+    ; ~/gclone.sh
