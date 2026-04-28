@@ -93,6 +93,7 @@ function main {
 
 	# parallel. make funcs visible to (bash only) child shells with 'export -f'
 	export -f repo_update repo_reset pushd popd
+	# todo: would be nice if this tagstring could print output in columns - the obvious fmt strings didnt work
 	parallel --tag --tagstring '{}\t\t' --jl "$sdir/gclone.log" repo_update $owner $host $dst ::: "${repos[@]}"
 	fails=$(awk 'NR > 1 {print $7}' "$sdir/gclone.log" | awk '{sum+=$1} END {print sum}')
 	succ=$(( ${#repos[@]} - fails ))
