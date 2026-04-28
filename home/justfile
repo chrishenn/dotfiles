@@ -4,6 +4,7 @@ cm:
     ; chezmoi init chrishenn -a --force \
     ; chezmoi update -a --force
 
+# full upgrade of package manager packages
 topgrade:
     $(op read op://homelab/svc/bash) \
     ; topgrade
