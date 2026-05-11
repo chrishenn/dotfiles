@@ -2,6 +2,9 @@
 
 # shellcheck disable=SC2329,SC2091,SC2207,SC2005
 
+# god in heaven this language needs to die
+# gnu parallel is cool but there's no straightforward way to return values (except text)
+
 set -e
 sdir=$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-$0}")")
 
@@ -10,8 +13,17 @@ host='github.com'
 dst="$HOME/Projects"
 ssh_keyf="$HOME/.ssh/id_ed25519"
 
-# god in heaven this language needs to die
-# gnu parallel is cool but there's no straightforward way to return values (except text)
+function check_or {
+	declare bry=$1
+	shift
+	if type -P "$bry" >&/dev/null; then
+		echo "gclone info: found '$bry'"
+		return 0
+	else
+		echo "gclone error: missing required binary '$bry'"
+		return 1
+	fi
+}
 
 function pushd_q {
 	command pushd_q "$@" >/dev/null
@@ -76,7 +88,6 @@ function main {
 			echo 'error: OP_SERVICE_ACCOUNT_TOKEN is empty or unset'
 			return 1
 		fi
-
 		echo "$(op read 'op://homelab/github/credential')" | gh auth login -h "$host" -p ssh --with-token --skip-ssh-key
 		if ! gh auth status &>/dev/null; then
 			echo 'error: gh auth login failed'
@@ -84,7 +95,7 @@ function main {
 		fi
 	fi
 
-	# my github ssh key. note: out of date ssh keyfile will not be update
+	# my github ssh key. note: an out of date ssh keyfile with an old key will not be updated if it exists
 	if ! test -f "$ssh_keyf"; then
 		op read "op://homelab/dkey/public key" -o "$ssh_keyf.pub" -f
 		op read "op://homelab/dkey/private key?ssh-format=openssh" -o "$ssh_keyf" -f
@@ -118,6 +129,14 @@ function main {
 	echo ''
 	[[ $succ -eq ${#repos[@]} ]]
 }
+
+check_or "git" || exit 1
+check_or "gh" || exit 1
+check_or "jq" || exit 1
+check_or "tr" || exit 1
+check_or "awk" || exit 1
+check_or "ssh-keyscan" || exit 1
+check_or "op"
 
 main && echo -e "\n SUCCESS with code: $?" || echo -e "\n FAILED with code: $?"
 exit

@@ -1,14 +1,8 @@
-# Include any additional configuration file(s)
-# [include] sections are processed in the order you write them
-# Files in $CONFIG_DIR/topgrade.d/ are automatically included before this file
 [include]
+# Files in $CONFIG_DIR/topgrade.d/ are automatically included before this file
 # paths = ["/etc/topgrade.toml"]
 
-
 [misc]
-# Run `sudo -v` to cache credentials at the start of the run
-# This avoids a blocking password prompt in the middle of an unattended run
-# (default: false)
 pre_sudo = true
 
 # Sudo command to be used
@@ -16,7 +10,7 @@ pre_sudo = true
 
 # Disable specific steps - same options as the command line flag
 disable = ["vscode", "jetbrains_toolbox", "jetbrains_pycharm", "jetbrains_clion", "jetbrains_goland",
-    "jetbrains_rustrover", "microsoft_store", "system", "containers", "shell"]
+    "jetbrains_rustrover", "microsoft_store", "system", "containers", "shell", "pnpm", "firmware"]
 
 # Ignore failures for these steps
 # ignore_failures = ["powershell"]
@@ -74,47 +68,28 @@ no_retry = true
 # this will be ignored if the binary is built without self update support
 #
 # available also via setting the environment variable TOPGRADE_NO_SELF_UPGRADE)
-# no_self_update = true
+no_self_update = true
 
 # Extra tracing filter directives
 # These are prepended to the `--log-filter` argument
 # See: https://docs.rs/tracing-subscriber/latest/tracing_subscriber/filter/struct.EnvFilter.html#directives
 # log_filters = ["topgrade::command=debug", "warn"]
 
-
 # Commands to run before anything
 [pre_commands]
 # "Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
 
-
 # Commands to run after anything
 [post_commands]
 # "Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
-
 
 # Custom commands
 [commands]
 # "Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
 # "Custom command using interactive shell (unix)" = "-i vim_upgrade"
 
-
-[python]
-# enable_pip_review = true                         ###disabled by default
-# enable_pip_review_local = true                   ###disabled by default
-# enable_pipupgrade = true                         ###disabled by default
-# pipupgrade_arguments = "-y -u --pip-path pip"    ###disabled by default
-
-# For the poetry step, by default, Topgrade skips its update if poetry is not
-# installed with the official script. This configuration entry forces Topgrade
-# to run the update in this case.
-#
-# (default: false)
-# poetry_force_self_update = true
-
-
 [composer]
 # self_update = true
-
 
 [brew]
 # For the BrewCask step
@@ -144,6 +119,9 @@ no_retry = true
 
 
 [linux]
+rpm_ostree = true
+bootc = false
+
 # Arch Package Manager to use.
 # Allowed values:
 #   autodetect, aura, garuda_update, pacman, pamac, paru, pikaur, trizen, yay
@@ -156,39 +134,19 @@ no_retry = true
 # dnf_arguments = "--refresh"
 
 # aura_aur_arguments = "-kx"
-
 # aura_pacman_arguments = ""
 # garuda_update_arguments = ""
-
 # show_arch_news = true
-
 # trizen_arguments = "--devel"
-
 # pikaur_arguments = ""
-
 # pamac_arguments = "--no-devel"
-
 # enable_tlmgr = true
-
 # emerge_sync_flags = "-q"
-
 # emerge_update_flags = "-uDNa --with-bdeps=y world"
-
 # redhat_distro_sync = false
-
 # suse_dup = false
-
-# rpm_ostree = false
-
-# For Fedora/CentOS/RHEL Atomic variants, if `bootc` is available and this configuration entry is set to true, use
-# it to do the update - Will also supercede rpm-ostree if enabled
-# (default: false)
-# bootc = false
-
 # nix_arguments = "--flake"
-
 # nix_env_arguments = "--prebuilt-only"
-
 # Extra Home Manager arguments
 # home_manager_arguments = ["--flake", "file"]
 
@@ -230,7 +188,7 @@ no_retry = true
 # self_rename = true
 
 
-[npm]
+# [npm]
 # Use sudo if the NPM directory isn't owned by the current user
 # use_sudo = true
 
@@ -249,11 +207,8 @@ no_retry = true
 # For `vim-plug`, execute `PlugUpdate!` instead of `PlugUpdate`
 # force_plug_update = true
 
-
 [firmware]
-# Offer to update firmware; if false just check for and display available updates
-# upgrade = true
-
+upgrade = false
 
 [vagrant]
 # Vagrant directories
@@ -265,17 +220,14 @@ no_retry = true
 # Always suspend vagrant boxes instead of powering off
 # always_suspend = true
 
-
 [flatpak]
-# Use sudo for updating the system-wide installation
-# use_sudo = true
-
+use_sudo = false
 
 [distrobox]
-# use_root = false
+use_root = false
 
 # containers = ["archlinux-latest"]
-[containers]
+# [containers]
 # Specify the containers to ignore while updating (Wildcard supported)
 # ignored_containers = ["ghcr.io/rancher-sandbox/rancher-desktop/rdx-proxy:latest", "docker.io*"]
 # Specify the runtime to use for containers (default: "docker", allowed values: "docker", "podman")
@@ -296,7 +248,7 @@ no_retry = true
 # (default: true)
 # startup_file = true
 
-[zigup]
+# [zigup]
 # Version strings passed to zigup.
 # These may be pinned versions such as "0.13.0" or branches such as "master".
 # Each one will be updated in its own zigup invocation.
