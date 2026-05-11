@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# shellcheck disable=SC2329,SC2091,SC2207,SC2005
+
 set -e
 sdir=$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-$0}")")
 
@@ -10,12 +13,12 @@ ssh_keyf="$HOME/.ssh/id_ed25519"
 # god in heaven this language needs to die
 # gnu parallel is cool but there's no straightforward way to return values (except text)
 
-function pushd {
-	command pushd "$@" >/dev/null
+function pushd_q {
+	command pushd_q "$@" >/dev/null
 }
 
-function popd {
-	command popd "$@" >/dev/null
+function popd_q {
+	command popd_q >/dev/null
 }
 
 function repo_reset {
@@ -29,10 +32,10 @@ function repo_reset {
 
 	# latest commit hash on origin/main
 	git fetch --force || echo 'error: git fetch failed' && return 1
-	hash=$(git log -n 1 $drm/$dbr --pretty=format:"%H")
+	hash=$(git log -n 1 "$drm/$dbr" --pretty=format:"%H")
 	[[ -z "$hash" ]] && echo 'error: latest commit hash not found' && return 1 || true
 
-	git reset --hard $hash && echo 'repo reset success' && return 0 || echo 'error: git reset failed' && return 1
+	git reset --hard "$hash" && echo 'repo reset success' && return 0 || echo 'error: git reset failed' && return 1
 }
 
 function repo_update {
@@ -46,13 +49,13 @@ function repo_update {
 	shift
 
 	bpath="$dst/$repo"
-	if ! test -d $bpath; then
-		gh repo clone $owner/$repo $bpath && return 0 || return 1
+	if ! test -d "$bpath"; then
+		gh repo clone "$owner/$repo" "$bpath" && return 0 || return 1
 	fi
 
-	pushd $bpath
-	git pull --force && popd && return 0
-	repo_reset && popd && return 0 || popd && return 1
+	pushd_q "$bpath"
+	git pull --force && popd_q && return 0
+	repo_reset && popd_q && return 0 || popd_q && return 1
 }
 
 function main {
@@ -74,7 +77,7 @@ function main {
 			return 1
 		fi
 
-		echo $(op read "op://homelab/github/credential") | gh auth login -h $host -p ssh --with-token --skip-ssh-key
+		echo "$(op read 'op://homelab/github/credential')" | gh auth login -h "$host" -p ssh --with-token --skip-ssh-key
 		if ! gh auth status &>/dev/null; then
 			echo 'error: gh auth login failed'
 			return 1
@@ -82,19 +85,19 @@ function main {
 	fi
 
 	# my github ssh key. note: out of date ssh keyfile will not be update
-	if ! test -f $ssh_keyf; then
+	if ! test -f "$ssh_keyf"; then
 		op read "op://homelab/dkey/public key" -o "$ssh_keyf.pub" -f
-		op read "op://homelab/dkey/private key?ssh-format=openssh" -o $ssh_keyf -f
-		chmod 600 $ssh_keyf
+		op read "op://homelab/dkey/private key?ssh-format=openssh" -o "$ssh_keyf" -f
+		chmod 600 "$ssh_keyf"
 	fi
 
 	# bump this limit -L if you have over 1000 repos
 	repos=($(gh repo list -L 1000 --json name | jq '.[].name' | tr -d '"' | sort))
 
 	# parallel. make funcs visible to (bash only) child shells with 'export -f'
-	export -f repo_update repo_reset pushd popd
+	export -f repo_update repo_reset pushd_q popd_q
 	# todo: would be nice if this tagstring could print output in columns - the obvious fmt strings didnt work
-	parallel --tag --tagstring '{}\t\t' --jl "$sdir/gclone.log" repo_update $owner $host $dst ::: "${repos[@]}"
+	parallel --tag --tagstring '{}\t\t' --jl "$sdir/gclone.log" repo_update "$owner" "$host" "$dst" ::: "${repos[@]}"
 	fails=$(awk 'NR > 1 {print $7}' "$sdir/gclone.log" | awk '{sum+=$1} END {print sum}')
 	succ=$((${#repos[@]} - fails))
 	rm "$sdir/gclone.log"

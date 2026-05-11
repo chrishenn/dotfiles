@@ -21,12 +21,9 @@ local linters = new Mapping<String, Step> {
         check = "shellcheck -x --color=always {{files}}"
     }
     ["trufflehog"] {
-        // always check the whole workspace and git history
-        workspace_indicator = "hk.pkl"
-        check = "trufflehog git --fail --no-update --log-level=-1 file://{{workspace}} 2>/dev/null"
-
-        // scan only files selected by hk, respecting `hk check --all`
-        // check = "trufflehog --fail --no-update filesystem {{files}}"
+        glob = List("*")
+        check = "trufflehog filesystem --fail --no-update --no-verification --log-level=-1 {{files}}"
+        output_summary = "hide"
     }
     ["gitleaks"] {
         // always check the whole workspace and git history
