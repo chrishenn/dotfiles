@@ -7,10 +7,10 @@ note: Macos not supported
 
 ```bash
 # linux: install, init, pull, and apply
-mise use -g chezmoi
-OP_SERVICE_ACCOUNT_TOKEN=<token> \
-MISE_GITHUB_TOKEN=<token> \
-chezmoi init chrishenn --apply --git-lfs
+mise use -g chezmoi op
+export OP_SERVICE_ACCOUNT_TOKEN=$(op read op://homelab/svc/credential)
+export GITHUB_TOKEN=$(op read op://homelab/github/credential)
+chezmoi init chrishenn --apply
 
 # pull new changes from github, apply, overwrite any local dotfile changes
 chezmoi update --apply --force
