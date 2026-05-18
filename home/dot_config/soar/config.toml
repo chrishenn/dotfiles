@@ -16,8 +16,8 @@ install_patterns = [
     "!*.version",
 ]
 
-#[profile.default]
-#root_path = "/home/chris/.local/share/soar"
+[profile.default]
+root_path = "$HOME/.local/share/soar"
 #packages_path = "/home/chris/.local/share/soar/packages"
 
 [[repositories]]
