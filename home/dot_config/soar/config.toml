@@ -1,9 +1,4 @@
 default_profile = "default"
-#cache_path = "/home/chris/.local/share/soar/cache"
-#db_path = "/home/chris/.local/share/soar/db"
-#bin_path = "/home/chris/.local/share/soar/bin"
-#repositories_path = "/home/chris/.local/share/soar/repos"
-#portable_dirs = "/home/chris/.local/share/soar/portable-dirs"
 parallel = true
 parallel_limit = 8
 ghcr_concurrency = 8
@@ -18,7 +13,6 @@ install_patterns = [
 
 [profile.default]
 root_path = "$HOME/.local/share/soar"
-#packages_path = "/home/chris/.local/share/soar/packages"
 
 [[repositories]]
 name = "soarpkgs"
