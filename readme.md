@@ -7,9 +7,10 @@ note: Macos not supported
 
 ```bash
 # linux: install, init, pull, and apply
+mise use -g chezmoi
 OP_SERVICE_ACCOUNT_TOKEN=<token> \
-GH_TOKEN=<token> \
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init chrishenn --apply --git-lfs
+MISE_GITHUB_TOKEN=<token> \
+chezmoi init chrishenn --apply --git-lfs
 
 # pull new changes from github, apply, overwrite any local dotfile changes
 chezmoi update --apply --force
