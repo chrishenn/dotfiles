@@ -15,6 +15,7 @@ jqp = "latest"
 yazi = "latest"
 fzf = "latest"
 
+op = "latest"
 starship = "latest"
 zoxide = "latest"
 atuin = "latest"
