@@ -8,6 +8,7 @@ pkl = "latest"
 lychee = "latest"
 prettier = "latest"
 just = "latest"
+fnox = "latest"
 
 [env]
 # libgit2 doesn't support git extension "refstorage"
