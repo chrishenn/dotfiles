@@ -8,11 +8,6 @@
 set -e
 sdir=$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-$0}")")
 
-owner='chrishenn'
-host='github.com'
-dst="$HOME/Projects"
-ssh_keyf="$HOME/.ssh/id_ed25519"
-
 function check_or {
 	declare bry=$1
 	shift
@@ -26,11 +21,11 @@ function check_or {
 }
 
 function pushd_q {
-	command pushd_q "$@" >/dev/null
+	command pushd "$@" &>/dev/null
 }
 
 function popd_q {
-	command popd_q >/dev/null
+	command popd &>/dev/null
 }
 
 function repo_reset {
@@ -71,18 +66,49 @@ function repo_update {
 }
 
 function main {
+	declare owner=${1:-'chrishenn'}
+	shift
+	declare host=${1:-'github.com'}
+	shift
+	declare dst=${1:-"$HOME/Projects"}
+	shift
+	declare ssh_keyf=${1:-"$HOME/.ssh/id_ed25519"}
+	shift
+
+	cat <<- END
+
+	---- gclone params ----
+	owner: 	  $owner
+	host: 	  $host
+	dst: 	  $dst
+	ssh_keyf: $ssh_keyf
+	sdir: 	  $sdir
+
+	END
+
+	check_or "git" || exit 1
+	check_or "gh" || exit 1
+	check_or "jq" || exit 1
+	check_or "tr" || exit 1
+	check_or "awk" || exit 1
+	check_or "ssh-keyscan" || exit 1
+	check_or "op" || exit 1
+	check_or "parallel" || exit 1
+
 	# git and ssh setup
-	mkdir -p "$HOME/.ssh"
+	mkdir -p $HOME/.ssh
+	git config --global --add safe.directory '*'
+	git config --global pull.rebase true
 
 	# add github keys to known_hosts to prevent interactive prompt. note: out of date keys will not be updated
-	if ! grep -q "github.com" ~/.ssh/known_hosts; then
-		ssh-keyscan github.com >>~/.ssh/known_hosts
+	if ! grep -q "github.com" $HOME/.ssh/known_hosts &>/dev/null; then
+		ssh-keyscan github.com >> $HOME/.ssh/known_hosts
 	fi
 
 	# gh login if not logged in
 	if ! gh auth status &>/dev/null; then
 		if [ -z "${OP_SERVICE_ACCOUNT_TOKEN}" ]; then
-			$(op read op://homelab/svc/bash) || (echo 'error: failed to read op://homelab/svc/bash' && return 1)
+			$(op read op://homelab/svc/bash)
 		fi
 		if [ -z "${OP_SERVICE_ACCOUNT_TOKEN}" ]; then
 			echo 'error: OP_SERVICE_ACCOUNT_TOKEN is empty or unset'
@@ -105,9 +131,10 @@ function main {
 	# bump this limit -L if you have over 1000 repos
 	repos=($(gh repo list -L 1000 --json name | jq '.[].name' | tr -d '"' | sort))
 
+	# todo: would be nice if this tagstring could print output in columns - the obvious fmt strings didnt work
+
 	# parallel. make funcs visible to (bash only) child shells with 'export -f'
 	export -f repo_update repo_reset pushd_q popd_q
-	# todo: would be nice if this tagstring could print output in columns - the obvious fmt strings didnt work
 	parallel --tag --tagstring '{}\t\t' --jl "$sdir/gclone.log" repo_update "$owner" "$host" "$dst" ::: "${repos[@]}"
 	fails=$(awk 'NR > 1 {print $7}' "$sdir/gclone.log" | awk '{sum+=$1} END {print sum}')
 	succ=$((${#repos[@]} - fails))
@@ -130,13 +157,5 @@ function main {
 	[[ $succ -eq ${#repos[@]} ]]
 }
 
-check_or "git" || exit 1
-check_or "gh" || exit 1
-check_or "jq" || exit 1
-check_or "tr" || exit 1
-check_or "awk" || exit 1
-check_or "ssh-keyscan" || exit 1
-check_or "op"
-
-main && echo -e "\n SUCCESS with code: $?" || echo -e "\n FAILED with code: $?"
+main "$@" && echo -e "\n SUCCESS with code: $?" || echo -e "\n FAILED with code: $?"
 exit
