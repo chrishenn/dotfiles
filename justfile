@@ -1,3 +1,5 @@
+set fallback
+
 alias s := sync
 alias f := fix
 alias c := check
