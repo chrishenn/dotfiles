@@ -14,10 +14,13 @@ gclone:
     $(op read op://homelab/svc/bash) \
     ; ~/gclone.sh
 
-# ssh into a remote, injecting op service account token into the remote shell
-_ssh usr ip port dir:
-    ssh {{ usr }}@{{ ip }} -p {{ port }} -t "$(op read op://homelab/svc/bash) && cd {{ dir }} && exec bash -l"
+_ssh usr ip port cmd:
+    ssh {{ usr }}@{{ ip }} -p {{ port }} -t "{{ cmd }}"
 
-rack0: (_ssh "chris" "192.168.1.70"  "22"   "/home/chris/Projects/homelab/rack0")
+dcmd(dir) := f"$(op read op://homelab/svc/bash) && cd {{ dir }} && exec bash -l"
+
+rack0 cmd=dcmd("/home/chris/Projects/homelab/rack0"):
+    just _ssh "chris" "192.168.1.70" "22" '{{cmd}}'
+
 rack4: (_ssh "chris" "192.168.1.142" "2200" "/home/chris/Projects/homelab/rack4")
 vps0:  (_ssh "chris" env('VPS0_IP')  "2200" "/home/chris/Projects/homelab/vps0")
