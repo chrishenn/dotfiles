@@ -14,16 +14,21 @@ gclone:
     $(op read op://homelab/svc/bash) \
     ; ~/gclone.sh
 
-_ssh usr ip port cmd:
-    ssh {{ usr }}@{{ ip }} -p {{ port }} -t "{{ cmd }}"
+_pty(flag) := if flag == "true" {"-t"} else {""}
+
+_ssh usr ip port cmd pty='true':
+    ssh {{ usr }}@{{ ip }} -p {{ port }} {{ _pty(pty) }} "{{ cmd }}"
 
 dcmd(dir) := f"$(op read op://homelab/svc/bash) && cd {{ dir }} && exec bash -l"
 
-rack0 cmd=dcmd("/home/chris/Projects/homelab/rack0"):
-    just _ssh "chris" "192.168.1.70" "22" '{{cmd}}'
+[arg("pty", long="pty", short="p")]
+rack0 cmd=dcmd("/home/chris/Projects/homelab/rack0") pty='true':
+    just _ssh "chris" "192.168.1.70" "22" '{{cmd}}' {{pty}}
 
-rack4 cmd=dcmd("/home/chris/Projects/homelab/rack4"):
-    just _ssh "chris" "192.168.1.142" "2200" '{{cmd}}'
+[arg("pty", long="pty", short="p")]
+rack4 cmd=dcmd("/home/chris/Projects/homelab/rack4") pty='true':
+    just _ssh "chris" "192.168.1.142" "2200" '{{cmd}}' {{pty}}
 
-vps0 cmd=dcmd("/home/chris/Projects/homelab/vps0"):
-    just _ssh "chris" {{env('VPS0_IP')}} "2200" '{{cmd}}'
+[arg("pty", long="pty", short="p")]
+vps0 cmd=dcmd("/home/chris/Projects/homelab/vps0") pty='true':
+    just _ssh "chris" {{env('VPS0_IP')}} "2200" '{{cmd}}' {{pty}}
