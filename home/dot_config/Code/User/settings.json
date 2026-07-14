@@ -233,7 +233,7 @@
           "comment.block",
           "comment.line"
         ],
-        "settings": { "fontStyle": "" }
+        "settings": {"fontStyle": ""}
       }
     ]
   }
