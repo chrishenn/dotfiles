@@ -8,7 +8,7 @@ theme = Monokai Vivid
 # theme = Xcode Dark hc
 
 font-family = Fira Code Retina
-background-opacity = 0.60
+background-opacity = 1.0
 background-blur = true
 confirm-close-surface = false
 window-padding-x = 4
