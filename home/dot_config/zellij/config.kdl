@@ -520,11 +520,11 @@ default_mode "normal"
 // A path to a certificate file to be used when setting up the web client to serve the
 // connection over HTTPs
 //
-// web_server_cert "/path/to/cert.pem"
+web_server_cert "$HOME/keys/henn.dev.crt"
 // A path to a key file to be used when setting up the web client to serve the
 // connection over HTTPs
 //
-// web_server_key "/path/to/key.pem"
+web_server_key "$HOME/keys/henn.dev.key"
 /// Whether to enforce https connections to the web server when it is bound to localhost
 /// (127.0.0.0/8)
 ///
