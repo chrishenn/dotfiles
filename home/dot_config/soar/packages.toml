@@ -6,7 +6,7 @@ binary_only = false
 ghostty = "*"
 helium-browser = "*"
 localsend = "*"
-signal-desktop = "*"
+signal-desktop = "8.16.0-1"
 discord = "*"
 btop = "*"
 
