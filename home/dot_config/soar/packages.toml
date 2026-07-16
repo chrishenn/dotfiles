@@ -32,7 +32,7 @@ version = "2.3.8"
 github = "vscodium/vscodium"
 asset_pattern = "VSCodium-*.glibc*-x86_64.AppImage"
 version = "1.121.03429"
-ls
+
 [packages.prusaslicer]
 github = "sarrchri/PrusaSlicer.AppImage"
 asset_pattern = "PrusaSlicer-*-anylinux-x86_64.AppImage"
