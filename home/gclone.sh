@@ -96,13 +96,13 @@ function main {
 	check_or "parallel" || exit 1
 
 	# git and ssh setup
-	mkdir -p $HOME/.ssh
+	mkdir -p "$HOME/.ssh"
 	git config --global --add safe.directory '*'
 	git config --global pull.rebase true
 
 	# add github keys to known_hosts to prevent interactive prompt. note: out of date keys will not be updated
-	if ! grep -q "github.com" $HOME/.ssh/known_hosts &>/dev/null; then
-		ssh-keyscan github.com >>$HOME/.ssh/known_hosts
+	if ! grep -q "github.com" "$HOME/.ssh/known_hosts" &>/dev/null; then
+		ssh-keyscan github.com >>"$HOME/.ssh/known_hosts"
 	fi
 
 	# gh login if not logged in
