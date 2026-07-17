@@ -555,7 +555,7 @@ show_release_notes false
 
 // Whether to show visual bell indicators (pane/tab frame flash and [!] suffix)
 // default is true
-// visual_bell true
+visual_bell false
 
 // Whether to focus panes on mouse hover
 // default is false
