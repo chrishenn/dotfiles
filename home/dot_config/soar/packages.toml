@@ -3,10 +3,10 @@ profile = "default"
 binary_only = false
 
 [packages]
+signal-desktop = "8.16.0-1"
 ghostty = "*"
 helium-browser = "*"
 localsend = "*"
-signal-desktop = "8.16.0-1"
 discord = "*"
 btop = "*"
 

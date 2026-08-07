@@ -37,7 +37,7 @@ rust = "latest"
 go = "latest"
 zig = "latest"
 zls = "latest"
-lua = "latest"
+#lua = "latest"
 
 node = "latest"
 npm = "latest"
