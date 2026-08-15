@@ -3,7 +3,7 @@ profile = "default"
 binary_only = false
 
 [packages]
-signal-desktop = "8.16.0-1"
+signal-desktop = "8.21.0-1"
 ghostty = "*"
 helium-browser = "*"
 localsend = "*"
@@ -41,7 +41,7 @@ version = "2.9.5-1@2026-05-22_1779472316"
 [packages.handy]
 github = "cjpais/handy"
 asset_pattern = "Handy_*_amd64.AppImage"
-version = "0.8.3"
+version = "0.9.5"
 
 [packages.caligula]
 github = "ifd3f/caligula"
@@ -51,4 +51,4 @@ version = "0.5.0"
 [packages.yaak]
 github = "mountain-loop/yaak"
 asset_pattern = "yaak_*_amd64.AppImage"
-version = "2026.4.0"
+version = "2026.6.0"
