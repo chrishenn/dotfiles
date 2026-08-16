@@ -1,3 +1,6 @@
+# https://docs.pkgforge.dev/
+# https://soar.qaidvoid.dev/quick-start
+
 [defaults]
 profile = "default"
 binary_only = false
