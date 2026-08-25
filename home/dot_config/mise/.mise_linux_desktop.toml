@@ -52,3 +52,43 @@ bun = "latest"
 "cargo:cargo-update" = "latest"
 "cargo:cargo-binstall" = "latest"
 "cargo:cargo-dist" = "latest"
+
+[bootstrap.brew]
+adopt = true
+
+[bootstrap.brew.taps]
+"stalwartlabs/tap" = "https://github.com/stalwartlabs/homebrew-tap.git"
+"valkyrie00/bbrew" = "https://github.com/valkyrie00/homebrew-bbrew.git"
+"ublue-os/tap" = "https://github.com/ublue-os/homebrew-tap.git"
+
+[bootstrap.packages]
+"brew:atuin" = "latest"
+"brew:valkyrie00/bbrew/bbrew" = "latest"
+"brew:detect-secrets" = "latest"
+"brew:feroxbuster" = "latest"
+"brew:git-lfs" = "latest"
+"brew:media-info" = "latest"
+"brew:parallel" = "latest"
+"brew:sevenzip" = "latest"
+"brew:stalwartlabs/tap/stalwart-cli" = "latest"
+"brew:trash-cli" = "latest"
+
+"brew-cask:font-fira-code-nerd-font" = "latest"
+"brew-cask:font-jetbrains-mono-nerd-font" = "latest"
+
+# not working yet
+# "brew-cask:ublue-os/tap/zed-linux" = "latest"
+# "brew-cask:ublue-os/tap/1password-gui-linux" = "latest"
+# "brew-cask:ublue-os/tap/jetbrains-toolbox-linux" = "latest"
+# "brew-cask:ublue-os/tap/visual-studio-code-linux" = "latest"
+
+"flatpak:md.obsidian.Obsidian" = "latest"
+"flatpak:io.github.cboxdoerfer.FSearch" = "latest"
+"flatpak:com.prusa3d.PrusaSlicer" = "latest"
+"flatpak:com.github.wwmm.easyeffects" = "latest"
+"flatpak:org.onlyoffice.desktopeditors" = "latest"
+"flatpak:org.kde.kdenlive" = "latest"
+"flatpak:com.belmoussaoui.Obfuscate" = "latest"
+"flatpak:io.gitlab.adhami3310.Converter" = "latest"
+"flatpak:org.audacityteam.Audacity" = "latest"
+"flatpak:org.darktable.Darktable" = "latest"

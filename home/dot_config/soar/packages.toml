@@ -60,3 +60,13 @@ version = "0.5.0"
 github = "mountain-loop/yaak"
 asset_pattern = "yaak_*_amd64.AppImage"
 version = "2026.6.0"
+
+[packages.stoat]
+github = "stoatchat/for-desktop"
+asset_pattern = "Stoat-*-anylinux-x86_64.AppImage"
+version = "1.5.2"
+
+[packages.avia]
+github = "AvaLilac/for-desktop"
+asset_pattern = "AviaClient-linux-x64.zip"
+version = "1.8.4"
