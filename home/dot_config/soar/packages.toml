@@ -6,22 +6,23 @@ profile = "default"
 binary_only = false
 
 [packages]
-signal-desktop = "8.21.0-1"
 ghostty = "*"
 helium-browser = "*"
 localsend = "*"
 discord = "*"
 btop = "*"
 
-#[packages.fluxer-stable]
-#url = "https://api.fluxer.app/dl/desktop/stable/linux/x64/{version}/appimage"
-#version = "*"
-#version_command = "curl -qfsSLI https://api.fluxer.app/dl/desktop/stable/linux/x64/latest/appimage | rg 'fluxer-stable-(.*)-x86_64.AppImage' -or '$1'"
+[packages.signal]
+url = "https://updates.signal.org/desktop/signal-desktop.AppImage"
+version = "v8.24.1"
+pinned = true
+version_command = "curl -qfsSL https://api.github.com/repos/signalapp/signal-desktop/releases/latest | jq -r '.tag_name'"
 
 [packages.fluxer]
 url = "https://api.canary.fluxer.app/dl/desktop/canary/linux/x64/latest/appimage"
 version = "*"
 version_command = "curl -qfsSLI https://api.canary.fluxer.app/dl/desktop/canary/linux/x64/latest/appimage | rg 'Fluxer.*Canary-(.*)-linux-x86_64.AppImage' -or '$1'"
+#version_command = "curl -qfsSLI https://api.fluxer.app/dl/desktop/stable/linux/x64/latest/appimage | rg 'fluxer-stable-(.*)-x86_64.AppImage' -or '$1'"
 
 [packages.kicad]
 url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-{version}-x86_64.AppImage.tar"

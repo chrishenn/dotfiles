@@ -80,7 +80,6 @@ adopt = true
 # "brew-cask:ublue-os/tap/zed-linux" = "latest"
 # "brew-cask:ublue-os/tap/1password-gui-linux" = "latest"
 # "brew-cask:ublue-os/tap/jetbrains-toolbox-linux" = "latest"
-# "brew-cask:ublue-os/tap/visual-studio-code-linux" = "latest"
 
 "flatpak:md.obsidian.Obsidian" = "latest"
 "flatpak:io.github.cboxdoerfer.FSearch" = "latest"
