@@ -14,8 +14,7 @@ btop = "*"
 
 [packages.signal]
 url = "https://updates.signal.org/desktop/signal-desktop.AppImage"
-version = "v8.24.1"
-pinned = true
+version = "*"
 # the latest release is never a pre-release
 version_command = "curl -qfsSL https://api.github.com/repos/signalapp/signal-desktop/releases/latest | jq -r '.tag_name'"
 #version_command = "curl -qfsSL https://api.github.com/repos/signalapp/signal-desktop/releases?per_page=10 | 'map(select(.prerelease == false)) | first | .tag_name'"
@@ -42,34 +41,34 @@ version = "2.3.8"
 [packages.vscodium]
 github = "vscodium/vscodium"
 asset_pattern = "VSCodium-*.glibc*-x86_64.AppImage"
-version = "1.126.04524"
+version = "*"
 
 [packages.prusaslicer]
 github = "sarrchri/PrusaSlicer.AppImage"
 asset_pattern = "PrusaSlicer-*-anylinux-x86_64.AppImage"
-version = "2.9.6-5@2026-08-21_1787296835"
+version = "*"
 
 [packages.handy]
 github = "cjpais/handy"
 asset_pattern = "Handy_*_amd64.AppImage"
-version = "0.9.6"
+version = "*"
 
 [packages.caligula]
 github = "ifd3f/caligula"
 asset_pattern = "caligula-x86_64-linux"
-version = "0.5.0"
+version = "*"
 
 [packages.yaak]
 github = "mountain-loop/yaak"
 asset_pattern = "yaak_*_amd64.AppImage"
-version = "2026.6.0"
+version = "*"
 
 [packages.stoat]
 github = "stoatchat/for-desktop"
 asset_pattern = "Stoat-*-anylinux-x86_64.AppImage"
-version = "1.5.2"
+version = "*"
 
 [packages.avia]
 github = "AvaLilac/for-desktop"
 asset_pattern = "AviaClient-linux-x64.zip"
-version = "1.8.4"
+version = "*"
