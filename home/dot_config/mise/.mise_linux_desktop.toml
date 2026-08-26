@@ -1,5 +1,6 @@
 # linux tools (desktop)
 
+op = "latest"
 semver = "latest"
 dust = "latest"
 bottom = "latest"
