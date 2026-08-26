@@ -47,12 +47,12 @@ version = "1.126.04524"
 [packages.prusaslicer]
 github = "sarrchri/PrusaSlicer.AppImage"
 asset_pattern = "PrusaSlicer-*-anylinux-x86_64.AppImage"
-version = "2.9.6-2@2026-07-21_1784620859"
+version = "2.9.6-5@2026-08-21_1787296835"
 
 [packages.handy]
 github = "cjpais/handy"
 asset_pattern = "Handy_*_amd64.AppImage"
-version = "0.9.5"
+version = "0.9.6"
 
 [packages.caligula]
 github = "ifd3f/caligula"
