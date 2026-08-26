@@ -16,7 +16,9 @@ btop = "*"
 url = "https://updates.signal.org/desktop/signal-desktop.AppImage"
 version = "v8.24.1"
 pinned = true
+# the latest release is never a pre-release
 version_command = "curl -qfsSL https://api.github.com/repos/signalapp/signal-desktop/releases/latest | jq -r '.tag_name'"
+#version_command = "curl -qfsSL https://api.github.com/repos/signalapp/signal-desktop/releases?per_page=10 | 'map(select(.prerelease == false)) | first | .tag_name'"
 
 [packages.fluxer]
 url = "https://api.canary.fluxer.app/dl/desktop/canary/linux/x64/latest/appimage"

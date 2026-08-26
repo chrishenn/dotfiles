@@ -1,5 +1,5 @@
 # linux tools (server)
-
+[tools]
 semver = "latest"
 dust = "latest"
 bottom = "latest"
