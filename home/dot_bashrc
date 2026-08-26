@@ -139,6 +139,11 @@ if test -d "$HOME/.local/share/soar/bin"; then
 	export PATH="$PATH:$HOME/.local/share/soar/bin"
 fi
 
+if test -d "$HOME/.proto"; then
+	export PROTO_HOME="$HOME/.proto";
+	export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
+fi
+
 type -P mise >&/dev/null && eval "$(mise activate bash)"
 type -P starship >&/dev/null && eval "$(starship init bash)"
 type -P zoxide >&/dev/null && eval "$(zoxide init bash)"

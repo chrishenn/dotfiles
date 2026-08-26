@@ -67,7 +67,6 @@ adopt = true
 "brew:valkyrie00/bbrew/bbrew" = "latest"
 "brew:detect-secrets" = "latest"
 "brew:feroxbuster" = "latest"
-"brew:git-lfs" = "latest"
 "brew:media-info" = "latest"
 "brew:parallel" = "latest"
 "brew:sevenzip" = "latest"
