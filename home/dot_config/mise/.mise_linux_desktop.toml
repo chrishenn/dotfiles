@@ -73,13 +73,12 @@ adopt = true
 "brew:stalwartlabs/tap/stalwart-cli" = "latest"
 "brew:trash-cli" = "latest"
 
-"brew-cask:font-fira-code-nerd-font" = "latest"
-"brew-cask:font-jetbrains-mono-nerd-font" = "latest"
-
-# not working yet
+# only font "tapped casks" are supported by mise right now
 # "brew-cask:ublue-os/tap/zed-linux" = "latest"
 # "brew-cask:ublue-os/tap/1password-gui-linux" = "latest"
 # "brew-cask:ublue-os/tap/jetbrains-toolbox-linux" = "latest"
+"brew-cask:font-fira-code-nerd-font" = "latest"
+"brew-cask:font-jetbrains-mono-nerd-font" = "latest"
 
 "flatpak:md.obsidian.Obsidian" = "latest"
 "flatpak:io.github.cboxdoerfer.FSearch" = "latest"
@@ -91,3 +90,79 @@ adopt = true
 "flatpak:io.gitlab.adhami3310.Converter" = "latest"
 "flatpak:org.audacityteam.Audacity" = "latest"
 "flatpak:org.darktable.Darktable" = "latest"
+
+# sudo timeout
+[bootstrap.files."/etc/sudoers.d/sudo_timeout"]
+content = "Defaults timestamp_timeout=180"
+owner = "root"
+group = "root"
+mode = "0440"
+
+# sysctl
+[bootstrap.files."/etc/sysctl.d/99-custom.conf"]
+content = """
+net.ipv4.ip_nonlocal_bind=1
+vm.overcommit_memory=1
+fs.inotify.max_user_watches=1014796
+fs.inotify.max_user_instances=1014796
+fs.inotify.max_queued_events=1014796
+net.ipv6.conf.all.disable_ipv6=1
+"""
+owner = "root"
+group = "root"
+mode = "0644"
+
+# power_shortcuts
+[bootstrap.files."~/.local/share/applications/restart.desktop"]
+template = true
+content = """
+[Desktop Entry]
+Name=Restart
+Exec=bash -c "sudo {{ env.HOME }}/.local/share/applications/restart.sh"
+Comment=Restart
+Terminal=true
+Type=Application
+Icon=system-reboot
+"""
+
+[bootstrap.files."~/.local/share/applications/shutdown.desktop"]
+template = true
+content = """
+[Desktop Entry]
+Name=Shutdown
+Exec=bash -c "sudo {{ env.HOME }}/.local/share/applications/shutdown.sh"
+Comment=Shutdown
+Terminal=true
+Type=Application
+Icon=system-shutdown
+"""
+
+[bootstrap.files."~/.local/share/applications/restart.sh"]
+content = "reboot now"
+mode = "0755"
+
+[bootstrap.files."~/.local/share/applications/shutdown.sh"]
+content = "shutdown now"
+mode = "0755"
+
+[bootstrap.files."/etc/sudoers.d/pwr"]
+content = """
+{{ env.USER }} ALL=(root) NOPASSWD:{{ env.HOME }}/.local/share/applications/shutdown.sh
+{{ env.USER }} ALL=(root) NOPASSWD:{{ env.HOME }}/.local/share/applications/restart.sh
+"""
+template = true
+owner = "root"
+group = "root"
+mode = "0440"
+
+[bootstrap.hooks.final]
+run = """
+# sysctl settings apply
+sudo sysctl --system -q
+# flatpak fix: a bunch didn't launch ootb due to file perm issue
+systemctl --user restart xdg-document-portal.service
+# allow obs droidcam to access media devices?
+flatpak override --user --device=all com.obsproject.Studio
+# docker device runtime
+sudo nvidia-ctk runtime configure --runtime=docker
+"""
