@@ -59,7 +59,7 @@
 [gpg]
     format = ssh
 [gpg "ssh"]
-    program = "/opt/1Password/op-ssh-sign"
+    program = "op-ssh-sign"
 [commit]
     verbose = true
     gpgsign = false
