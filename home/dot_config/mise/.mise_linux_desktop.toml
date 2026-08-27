@@ -164,5 +164,5 @@ systemctl --user restart xdg-document-portal.service
 # allow obs droidcam to access media devices?
 flatpak override --user --device=all com.obsproject.Studio
 # docker device runtime
-sudo nvidia-ctk runtime configure --runtime=docker
+sudo nvidia-ctk runtime configure --runtime=docker --quiet
 """
