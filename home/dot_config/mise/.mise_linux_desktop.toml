@@ -155,14 +155,18 @@ owner = "root"
 group = "root"
 mode = "0440"
 
-[bootstrap.hooks.final]
+[bootstrap.hooks.post-packages]
 run = """
-# sysctl settings apply
-sudo sysctl --system -q
 # flatpak fix: a bunch didn't launch ootb due to file perm issue
 systemctl --user restart xdg-document-portal.service
 # allow obs droidcam to access media devices?
 flatpak override --user --device=all com.obsproject.Studio
 # docker device runtime
-sudo nvidia-ctk runtime configure --runtime=docker --quiet
+sudo nvidia-ctk runtime configure --runtime=docker --set-as-default --quiet
+"""
+
+[bootstrap.hooks.final]
+run = """
+# sysctl settings apply
+sudo sysctl --system -q
 """
