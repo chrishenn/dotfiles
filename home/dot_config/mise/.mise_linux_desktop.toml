@@ -1,4 +1,23 @@
-# linux tools (desktop)
+# linux (desktop)
+[settings]
+experimental = true
+trusted_config_paths = ["[/]"]
+auto_update = true
+registry_floating = true
+
+[env]
+FNOX_AGE_KEY_FILE = "~/.ssh/id_ed25519"
+TERM = "xterm-256color"
+EDITOR = "nano"
+KUBE_EDITOR = "nano"
+COMPOSE_BAKE = true
+OP_RUN_NO_MASKING = true
+HK_MISE = 1
+HK_LIBGIT2 = 0
+UV_PREVIEW = 1
+MISE_NPM_BUN = 1
+JUST_UNSTABLE = 1
+
 [tools]
 op = "latest"
 semver = "latest"
@@ -53,6 +72,16 @@ bun = "latest"
 "cargo:cargo-update" = "latest"
 "cargo:cargo-binstall" = "latest"
 "cargo:cargo-dist" = "latest"
+
+[bootstrap.groups.chris]
+system = true
+gid = 1000
+
+[bootstrap.users.chris]
+system = true
+group = "chris"
+groups = ["docker", "incus-admin", "libvirt"]
+uid = 1000
 
 [bootstrap.brew]
 adopt = true
@@ -155,6 +184,38 @@ owner = "root"
 group = "root"
 mode = "0440"
 
+# docker config
+[bootstrap.files."/etc/docker/daemon.json"]
+content = """
+{
+    "registry-mirrors": ["https://zot.henn.dev"],
+    "default-runtime": "nvidia",
+    "runtimes": {
+        "nvidia": {
+            "args": [],
+            "path": "nvidia-container-runtime"
+        }
+    },
+    "log-level": "warn",
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "10m",
+        "max-file": "5"
+    },
+    "default-address-pools": [
+        {
+            "base": "172.16.0.0/12",
+            "size": 24
+        }
+    ]
+}
+"""
+owner = "root"
+group = "root"
+mode = "0644"
+notify = ["docker"]
+
+# hooks
 [bootstrap.hooks.post-packages]
 run = """
 # flatpak fix: a bunch didn't launch ootb due to file perm issue
@@ -170,3 +231,51 @@ run = """
 # sysctl settings apply
 sudo sysctl --system -q
 """
+
+[bootstrap.services.docker]
+state = "running"
+enabled = true
+on_change = "reload_or_restart"
+
+[bootstrap.repos]
+# My parallel gclone.sh is much faster for initial clones, since mise here fetches serially.
+#   However, this mise update is safe for dirty worktrees, where gclone.sh
+#   is destructive because it was designed for backing up github repos to a restic target.
+"~/Projects/a4dj" = { url = "https://github.com/chrishenn/a4dj" }
+"~/Projects/agent_interface" = { url = "https://github.com/chrishenn/agent_interface" }
+"~/Projects/better_power" = { url = "https://github.com/chrishenn/better_power" }
+"~/Projects/canny" = { url = "https://github.com/chrishenn/canny" }
+"~/Projects/ccpt" = { url = "https://github.com/chrishenn/ccpt" }
+"~/Projects/chplib" = { url = "https://github.com/chrishenn/chplib" }
+"~/Projects/chrishenn" = { url = "https://github.com/chrishenn/chrishenn" }
+"~/Projects/configs" = { url = "https://github.com/chrishenn/configs" }
+"~/Projects/const_fonts" = { url = "https://github.com/chrishenn/const_fonts" }
+"~/Projects/cuda_libraries" = { url = "https://github.com/chrishenn/cuda_libraries" }
+"~/Projects/deep_mem" = { url = "https://github.com/chrishenn/deep_mem" }
+"~/Projects/dotfiles" = { url = "https://github.com/chrishenn/dotfiles" }
+"~/Projects/drivers" = { url = "https://github.com/chrishenn/drivers" }
+"~/Projects/find_strings" = { url = "https://github.com/chrishenn/find_strings" }
+"~/Projects/hardware" = { url = "https://github.com/chrishenn/hardware" }
+"~/Projects/homelab" = { url = "https://github.com/chrishenn/homelab" }
+"~/Projects/hotkey" = { url = "https://github.com/chrishenn/hotkey" }
+"~/Projects/leetcode" = { url = "https://github.com/chrishenn/leetcode" }
+"~/Projects/lnks" = { url = "https://github.com/chrishenn/lnks" }
+"~/Projects/oodl" = { url = "https://github.com/chrishenn/oodl" }
+"~/Projects/patch_sample" = { url = "https://github.com/chrishenn/patch_sample" }
+"~/Projects/pixelate" = { url = "https://github.com/chrishenn/pixelate" }
+"~/Projects/portable" = { url = "https://github.com/chrishenn/portable" }
+"~/Projects/private" = { url = "https://github.com/chrishenn/private" }
+"~/Projects/private_archive" = { url = "https://github.com/chrishenn/private_archive" }
+"~/Projects/project_stubs" = { url = "https://github.com/chrishenn/project_stubs" }
+"~/Projects/py_ref" = { url = "https://github.com/chrishenn/py_ref" }
+"~/Projects/realtek" = { url = "https://github.com/chrishenn/realtek" }
+"~/Projects/rtoolz" = { url = "https://github.com/chrishenn/rtoolz" }
+"~/Projects/scoops" = { url = "https://github.com/chrishenn/scoops" }
+"~/Projects/tr_agent" = { url = "https://github.com/chrishenn/tr_agent" }
+"~/Projects/tr_backend" = { url = "https://github.com/chrishenn/tr_backend" }
+"~/Projects/type-stubs" = { url = "https://github.com/chrishenn/type-stubs" }
+"~/Projects/uavolt" = { url = "https://github.com/chrishenn/uavolt" }
+"~/Projects/unattend" = { url = "https://github.com/chrishenn/unattend" }
+"~/Projects/vscode" = { url = "https://github.com/chrishenn/vscode" }
+"~/Projects/zenprof" = { url = "https://github.com/chrishenn/zenprof" }
+"~/Projects/zentool" = { url = "https://github.com/chrishenn/zentool" }
