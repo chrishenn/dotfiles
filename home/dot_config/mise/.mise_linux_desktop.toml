@@ -185,6 +185,7 @@ group = "root"
 mode = "0440"
 
 # docker config
+# equivalent to: sudo nvidia-ctk runtime configure --runtime=docker --set-as-default --quiet
 [bootstrap.files."/etc/docker/daemon.json"]
 content = """
 {
@@ -222,8 +223,6 @@ run = """
 systemctl --user restart xdg-document-portal.service
 # allow obs droidcam to access media devices?
 flatpak override --user --device=all com.obsproject.Studio
-# docker device runtime
-sudo nvidia-ctk runtime configure --runtime=docker --set-as-default --quiet
 """
 
 [bootstrap.hooks.final]
