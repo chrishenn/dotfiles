@@ -120,6 +120,14 @@ adopt = true
 "flatpak:org.audacityteam.Audacity" = "latest"
 "flatpak:org.darktable.Darktable" = "latest"
 
+[bootstrap.hooks.post-packages]
+run = """
+# flatpak fix: a bunch didn't launch ootb due to file perm issue
+systemctl --user restart xdg-document-portal.service
+# allow obs droidcam to access media devices?
+flatpak override --user --device=all com.obsproject.Studio
+"""
+
 # sudo timeout
 [bootstrap.files."/etc/sudoers.d/sudo_timeout"]
 content = "Defaults timestamp_timeout=180"
@@ -216,25 +224,52 @@ group = "root"
 mode = "0644"
 notify = ["docker"]
 
-# hooks
-[bootstrap.hooks.post-packages]
-run = """
-# flatpak fix: a bunch didn't launch ootb due to file perm issue
-systemctl --user restart xdg-document-portal.service
-# allow obs droidcam to access media devices?
-flatpak override --user --device=all com.obsproject.Studio
+# protonvpn repo
+[bootstrap.files."/etc/yum.repos.d/protonvpn-stable.repo"]
+content = """
+[protonvpn-fedora-stable]
+name = ProtonVPN Fedora Stable repository
+baseurl = https://repo.protonvpn.com/fedora-$releasever-stable
+enabled = 1
+gpgcheck = 1
+repo_gpgcheck = 0
+skip_if_unavailable = true
+gpgkey = https://repo.protonvpn.com/fedora-$releasever-stable/public_key.asc
 """
+owner = "root"
+group = "root"
+mode = "0644"
 
-[bootstrap.hooks.final]
-run = """
-# sysctl settings apply
-sudo sysctl --system -q
+# chrome repo
+[bootstrap.files."/etc/yum.repos.d/google-chrome.repo"]
+content = """
+[google-chrome]
+name=google-chrome
+baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
+enabled=1
+gpgcheck=1
+gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 """
+owner = "root"
+group = "root"
+mode = "0644"
+
+# nfs mounts
+[bootstrap.directories]
+"/var/mnt/f" = {owner = "chris", group = "chris", mode = "0777"}
+"/var/mnt/h" = {owner = "chris", group = "chris", mode = "0777"}
+"/var/mnt/k" = {owner = "chris", group = "chris", mode = "0777"}
+"/var/mnt/r" = {owner = "chris", group = "chris", mode = "0777"}
 
 [bootstrap.services.docker]
 state = "running"
 enabled = true
 on_change = "reload_or_restart"
+
+[bootstrap.hooks.final]
+run = """
+sudo sysctl -q --system
+"""
 
 [bootstrap.repos]
 # My parallel gclone.sh is much faster for initial clones, since mise here fetches serially.
