@@ -73,6 +73,17 @@ bun = "latest"
 "cargo:cargo-binstall" = "latest"
 "cargo:cargo-dist" = "latest"
 
+# bootstrap: aurora (desktop)
+[bootstrap.secrets]
+ssh_authorized_keys = "SSH_AUTHORIZED_KEYS"
+
+[bootstrap.files."~/.ssh/authorized_keys"]
+content = """
+{{secret(ssh_authorized_keys)}}
+"""
+template = true
+
+
 [bootstrap.groups.chris]
 system = true
 gid = 1000
