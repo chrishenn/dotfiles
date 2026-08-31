@@ -52,6 +52,7 @@ rclone = "latest"
 aws-cli = "latest"
 ruff = "latest"
 shellcheck = "latest"
+mr-boxington = "latest"
 
 rust = "latest"
 go = "latest"
