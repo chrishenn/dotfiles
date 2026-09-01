@@ -144,9 +144,9 @@ if test -d "$HOME/.proto"; then
 	export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
 fi
 
-type -P mise >&/dev/null && eval "$(mise activate bash)"
 type -P starship >&/dev/null && eval "$(starship init bash)"
 type -P zoxide >&/dev/null && eval "$(zoxide init bash)"
 type -P op >&/dev/null && source <(op completion bash)
 type -P fnox >&/dev/null && eval "$(fnox activate bash)"
 type -P pixi >&/dev/null && eval "$(pixi completion --shell bash)"
+type -P mise >&/dev/null && eval "$(mise activate bash)"
