@@ -1,6 +1,7 @@
 alias j='just'
 alias p='pixi'
 alias m='mise'
+alias mr='mise run'
 alias k='kubectl'
 alias cm='chezmoi'
 
