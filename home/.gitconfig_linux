@@ -18,6 +18,8 @@
     sort = version:refname
 [init]
     defaultBranch = main
+    # until cargo libgit2 can handle "reftable"
+    defaultRefFormat = files
 [diff]
     algorithm = histogram
     colorMoved = plain
@@ -63,3 +65,4 @@
 [commit]
     verbose = true
     gpgsign = false
+
