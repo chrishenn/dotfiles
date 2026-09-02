@@ -18,4 +18,6 @@ shell-integration-features = no-cursor
 notify-on-command-finish = never
 bell-features = no-system,no-audio,no-attention,no-title,no-border
 
+# gtk only
+app-notifications = no-clipboard-copy
 mouse-scroll-multiplier = 1
