@@ -1,7 +1,7 @@
 # linux (desktop)
 [settings]
 experimental = true
-trusted_config_paths = ["[/]"]
+trusted_config_paths = ["/"]
 auto_update = true
 registry_floating = true
 
