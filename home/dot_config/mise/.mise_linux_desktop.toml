@@ -17,11 +17,6 @@ HK_MISE = 1
 UV_PREVIEW = 1
 JUST_UNSTABLE = 1
 
-TERM = "xterm-256color"
-EDITOR = "nano"
-KUBE_EDITOR = "nano"
-COMPOSE_BAKE = true
-
 [tools]
 op = "latest"
 semver = "latest"
