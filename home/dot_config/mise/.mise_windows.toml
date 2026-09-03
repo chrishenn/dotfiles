@@ -1,9 +1,9 @@
 # windows
 [settings]
 experimental = true
-trusted_config_paths = ["[/]"]
-auto_update = true
 registry_floating = true
+auto_update = true
+trusted_config_paths = ["[/]"]
 
 [env]
 FNOX_AGE_KEY_FILE = "~/.ssh/id_ed25519"
