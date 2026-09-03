@@ -11,5 +11,4 @@ just = "latest"
 fnox = "latest"
 
 [env]
-# libgit2 doesn't support git extension "refstorage"
-HK_LIBGIT2 = 0
+HK_MISE = 1
