@@ -15,6 +15,7 @@ local linters = new Mapping<String, Step> {
     ["detect_private_key"] = Builtins.detect_private_key
     ["check_added_large_files"] = Builtins.check_added_large_files
     ["shellcheck"] = (Builtins.shellcheck) {
+        exclude = "*.tmpl"
         fix = ""
         check = "shellcheck -x --color=always {{files}}"
     }
