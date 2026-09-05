@@ -52,6 +52,7 @@ aws-cli = "latest"
 ruff = "latest"
 shellcheck = "latest"
 mr-boxington = "latest"
+helm = "latest"
 
 rust = "latest"
 go = "latest"
