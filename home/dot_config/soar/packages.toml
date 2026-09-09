@@ -10,6 +10,7 @@ ghostty = "*"
 localsend = "*"
 discord = "*"
 btop = "*"
+prusaslicer = "*"
 
 [packages.kicad]
 url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-{version}-x86_64.AppImage.tar"
@@ -39,12 +40,7 @@ version = "*"
 
 [packages.vscodium]
 github = "vscodium/vscodium"
-asset_pattern = "VSCodium-*.glibc*-x86_64.AppImage"
-version = "*"
-
-[packages.prusaslicer]
-github = "sarrchri/PrusaSlicer.AppImage"
-asset_pattern = "PrusaSlicer-*-anylinux-x86_64.AppImage"
+asset_pattern = "VSCodium-*-x86_64.AppImage"
 version = "*"
 
 [packages.handy]
