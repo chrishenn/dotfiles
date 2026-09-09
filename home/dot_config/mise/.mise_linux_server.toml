@@ -3,7 +3,7 @@
 experimental = true
 registry_floating = true
 auto_update = true
-trusted_config_paths = ["[/]"]
+trusted_config_paths = ["/"]
 
 [env]
 FNOX_AGE_KEY_FILE = "~/.ssh/id_ed25519"
@@ -18,6 +18,7 @@ UV_PREVIEW = 1
 JUST_UNSTABLE = 1
 
 [tools]
+op = "latest"
 semver = "latest"
 dust = "latest"
 bottom = "latest"
@@ -28,20 +29,24 @@ jless = "latest"
 fd = "latest"
 rg = "latest"
 jq = "latest"
+sd = "latest"
 yq = "latest"
 jqp = "latest"
 yazi = "latest"
-zoxide = "latest"
+fzf = "latest"
+
 starship = "latest"
+zoxide = "latest"
+zellij = "latest"
 
 chezmoi = "latest"
 just = "latest"
 fnox = "latest"
-op = "latest"
 powershell = "latest"
-zellij = "latest"
 television = "latest"
 rclone = "latest"
 aws-cli = "latest"
 ruff = "latest"
 shellcheck = "latest"
+mr-boxington = "latest"
+helm = "latest"
