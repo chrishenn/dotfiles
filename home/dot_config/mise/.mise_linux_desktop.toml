@@ -72,3 +72,6 @@ bun = "latest"
 "cargo:cargo-update" = "latest"
 "cargo:cargo-binstall" = "latest"
 "cargo:cargo-dist" = "latest"
+
+[bootstrap.services.mise-history]
+builtin = "history-watch"

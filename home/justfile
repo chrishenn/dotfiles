@@ -9,7 +9,7 @@ topgrade:
     $(op read op://homelab/svc/bash) \
     ; topgrade
 
-# 'git clone' all repos for the default user
+# !!DANGER!! unsafe overwriting 'git clone' for all repos
 gclone:
     $(op read op://homelab/svc/bash) \
     ; ~/gclone.sh
@@ -17,6 +17,10 @@ gclone:
 # sync secrets to age home-level config
 ss:
     fnox sync -p age -c ~/.config/fnox/config.toml
+
+# mise bootstrap
+mb:
+    mise bootstrap apply --skip-dirty -y
 
 _pty(flag) := if flag == "true" {"-t"} else {""}
 _cmd(dir) := f"$(op read op://homelab/svc/bash) && cd {{ dir }} && exec bash -l"

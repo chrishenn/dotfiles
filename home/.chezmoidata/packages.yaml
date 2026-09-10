@@ -1,3 +1,4 @@
+# replaced with mise bootstrap packages
 packages:
   linux:
     flatpak_remote:
