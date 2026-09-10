@@ -1,3 +1,0 @@
-ci: pipeline ci
-co: mr checkout
-newrepo: repo create --defaultBranch "main" --private --skipGitInit

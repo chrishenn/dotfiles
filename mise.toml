@@ -5,10 +5,6 @@ trufflehog = "latest"
 shfmt = "latest"
 hk = "latest"
 pkl = "latest"
-lychee = "latest"
 prettier = "latest"
 just = "latest"
 fnox = "latest"
-
-[env]
-HK_MISE = 1
