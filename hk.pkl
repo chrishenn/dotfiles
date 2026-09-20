@@ -11,7 +11,6 @@ local formatters = new Mapping<String, Step> {
 }
 
 local linters = new Mapping<String, Step> {
-//     ["lychee"] = Builtins.lychee
     ["detect_private_key"] = Builtins.detect_private_key
     ["check_added_large_files"] = Builtins.check_added_large_files
     ["shellcheck"] = (Builtins.shellcheck) {

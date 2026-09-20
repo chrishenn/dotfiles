@@ -1,9 +1,14 @@
 # dotfiles
 
-### basic usage
+chezmoi dotfiles
+
+note: replaced with mise bootstrap project (https://github.com/chrishenn/bootstrap)
+
+---
+
+## usage
 
 note: These dotfile templates read from my 1password vault to render my ssh keys. You'll need to adapt them
-note: Macos not supported
 
 ```bash
 # linux: install, init, pull, and apply
@@ -33,9 +38,7 @@ $env:OP_SERVICE_ACCOUNT_TOKEN = ''
 chezmoi init chrishenn --apply --force
 ```
 
-### dev
-
-since this is a public repo, pre-commit checks are mostly to avoid committing secrets
+## dev
 
 ```bash
 # lint fix
@@ -61,11 +64,11 @@ gitleaks git -r ds.json
 gitleaks git -b ds.json
 ```
 
-### ref
+## ref
 
 https://github.com/twpayne/dotfiles/
 
-### notes
+## notes
 
 - you will need to shell into the target machine and manually apply these dotfiles, at least on linux, because the
   apt install commands require interactive sudo elevation - not ideal
