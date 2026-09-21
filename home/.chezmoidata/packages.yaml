@@ -16,7 +16,6 @@ packages:
     flatpak_override:
       - '--user --device=all com.obsproject.Studio'
     brews:
-      - dra
       - git-filter-repo
       - figlet
       - lolcat
